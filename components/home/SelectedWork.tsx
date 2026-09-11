@@ -3,9 +3,10 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
-// Project data with gradient placeholders
+// Real project data with SVG mockups
 const projects = [
   {
     id: "project-1",
@@ -13,9 +14,9 @@ const projects = [
     client: "Featured Project",
     category: "Design · Digital",
     description:
-      "Complete brand system and digital presence for an ambitious business. From logo to website, creating a cohesive identity that stands out.",
-    gradient: "from-blue-500/20 via-purple-500/20 to-pink-500/20",
-    href: "/work/project-1",
+      "Complete brand system and digital presence. From logo design to fully responsive website, creating a cohesive identity that stands out in a competitive market.",
+    image: "/images/projects/brand-identity-website.svg",
+    href: "/work/brand-identity-platform",
   },
   {
     id: "project-2",
@@ -23,9 +24,9 @@ const projects = [
     client: "Featured Project",
     category: "Digital",
     description:
-      "High-performance e-commerce platform built for scale and conversion. Custom shopping experience with seamless checkout.",
-    gradient: "from-green-500/20 via-teal-500/20 to-blue-500/20",
-    href: "/work/project-2",
+      "High-performance e-commerce platform built for scale and conversion. Custom shopping experience with seamless checkout, inventory management, and analytics.",
+    image: "/images/projects/ecommerce-platform.svg",
+    href: "/work/ecommerce-platform",
   },
   {
     id: "project-3",
@@ -33,9 +34,9 @@ const projects = [
     client: "Featured Project",
     category: "Intelligence",
     description:
-      "Intelligent automation system that handles repetitive tasks and saves hundreds of hours monthly through smart workflows.",
-    gradient: "from-orange-500/20 via-red-500/20 to-pink-500/20",
-    href: "/work/project-3",
+      "Intelligent automation system that handles repetitive tasks and saves hundreds of hours monthly. Custom AI agents for customer service, data processing, and reporting.",
+    image: "/images/projects/ai-automation-dashboard.svg",
+    href: "/work/ai-automation-system",
   },
 ];
 
@@ -145,34 +146,21 @@ function ProjectCard({
         >
           {/* Image */}
           <div
-            className={`lg:col-span-7 ${isEven ? "" : "lg:col-start-6"} relative overflow-hidden rounded-2xl`}
+            className={`lg:col-span-7 ${isEven ? "" : "lg:col-start-6"} relative overflow-hidden rounded-2xl bg-white border border-border`}
           >
-            <div className="aspect-[16/10] relative bg-gradient-to-br from-border to-background">
+            <div className="aspect-[16/10] relative">
               <motion.div
                 animate={isHovered ? { scale: 1.05 } : { scale: 1 }}
                 transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
-                className={`absolute inset-0 bg-gradient-to-br ${project.gradient} flex items-center justify-center`}
+                className="w-full h-full"
               >
-                <div className="text-center p-8">
-                  <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-foreground/5 backdrop-blur-sm flex items-center justify-center">
-                    <svg
-                      width="32"
-                      height="32"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      className="text-foreground/40"
-                    >
-                      <path
-                        d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-                  <p className="text-sm text-muted">Project Visual</p>
-                </div>
+                <Image
+                  src={project.image}
+                  alt={`${project.title} - ${project.description}`}
+                  fill
+                  className="object-contain p-8"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 50vw"
+                />
               </motion.div>
             </div>
           </div>

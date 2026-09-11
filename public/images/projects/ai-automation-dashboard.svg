@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none">
+  <!-- Background -->
+  <rect width="1600" height="1000" fill="#FAFAFA"/>
+
+  <!-- Dashboard Window -->
+  <g transform="translate(100, 100)">
+    <!-- Window Chrome -->
+    <rect width="1400" height="800" rx="12" fill="white" stroke="#E5E5E5" stroke-width="2"/>
+    <rect width="1400" height="40" fill="#0F0F0F"/>
+
+    <!-- Window Controls -->
+    <circle cx="20" cy="20" r="6" fill="#FF5F57"/>
+    <circle cx="40" cy="20" r="6" fill="#FFBD2E"/>
+    <circle cx="60" cy="20" r="6" fill="#28CA42"/>
+
+    <!-- Title -->
+    <text x="700" y="25" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="white" opacity="0.9">
+      AI Automation Dashboard
+    </text>
+
+    <!-- Sidebar -->
+    <rect y="40" width="240" height="760" fill="#FAFAFA"/>
+
+    <!-- Sidebar Items -->
+    <g transform="translate(20, 80)">
+      <rect width="200" height="40" rx="8" fill="#0F0F0F"/>
+      <text x="15" y="26" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="white">
+        Dashboard
+      </text>
+
+      <text x="15" y="86" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#737373">
+        Workflows
+      </text>
+      <text x="15" y="126" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#737373">
+        AI Agents
+      </text>
+      <text x="15" y="166" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#737373">
+        Analytics
+      </text>
+      <text x="15" y="206" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#737373">
+        Settings
+      </text>
+    </g>
+
+    <!-- Main Content Area -->
+    <g transform="translate(260, 60)">
+      <!-- Header -->
+      <text x="0" y="40" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="600" fill="#0F0F0F">
+        Active Workflows
+      </text>
+
+      <!-- Stats Cards -->
+      <g transform="translate(0, 80)">
+        <!-- Card 1 -->
+        <rect width="340" height="140" rx="12" fill="white" stroke="#E5E5E5" stroke-width="2"/>
+        <text x="20" y="35" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#737373">
+          Tasks Automated
+        </text>
+        <text x="20" y="80" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="600" fill="#0F0F0F">
+          1,247
+        </text>
+        <text x="20" y="110" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#10B981">
+          ↑ 23% this month
+        </text>
+
+        <!-- Card 2 -->
+        <g transform="translate(380, 0)">
+          <rect width="340" height="140" rx="12" fill="white" stroke="#E5E5E5" stroke-width="2"/>
+          <text x="20" y="35" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#737373">
+            Time Saved
+          </text>
+          <text x="20" y="80" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="600" fill="#0F0F0F">
+            342h
+          </text>
+          <text x="20" y="110" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#10B981">
+            ↑ 18% this month
+          </text>
+        </g>
+
+        <!-- Card 3 -->
+        <g transform="translate(760, 0)">
+          <rect width="340" height="140" rx="12" fill="white" stroke="#E5E5E5" stroke-width="2"/>
+          <text x="20" y="35" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#737373">
+            Active Agents
+          </text>
+          <text x="20" y="80" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="600" fill="#0F0F0F">
+            12
+          </text>
+          <text x="20" y="110" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#737373">
+            All running
+          </text>
+        </g>
+      </g>
+
+      <!-- Workflow List -->
+      <g transform="translate(0, 260)">
+        <rect width="1120" height="400" rx="12" fill="white" stroke="#E5E5E5" stroke-width="2"/>
+
+        <text x="20" y="40" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="600" fill="#0F0F0F">
+          Recent Workflows
+        </text>
+
+        <!-- Workflow Items -->
+        <g transform="translate(20, 60)">
+          <!-- Item 1 -->
+          <rect width="1080" height="60" fill="#FAFAFA"/>
+          <circle cx="30" cy="30" r="8" fill="#10B981"/>
+          <text x="60" y="25" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="500" fill="#0F0F0F">
+            Email Response Automation
+          </text>
+          <text x="60" y="43" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#737373">
+            Running • 47 tasks completed today
+          </text>
+
+          <!-- Item 2 -->
+          <g transform="translate(0, 80)">
+            <rect width="1080" height="60" fill="white"/>
+            <circle cx="30" cy="30" r="8" fill="#10B981"/>
+            <text x="60" y="25" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="500" fill="#0F0F0F">
+              Data Entry Assistant
+            </text>
+            <text x="60" y="43" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#737373">
+              Running • 89 entries processed today
+            </text>
+          </g>
+
+          <!-- Item 3 -->
+          <g transform="translate(0, 160)">
+            <rect width="1080" height="60" fill="#FAFAFA"/>
+            <circle cx="30" cy="30" r="8" fill="#10B981"/>
+            <text x="60" y="25" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="500" fill="#0F0F0F">
+              Customer Support Bot
+            </text>
+            <text x="60" y="43" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#737373">
+              Running • 23 inquiries handled today
+            </text>
+          </g>
+
+          <!-- Item 4 -->
+          <g transform="translate(0, 240)">
+            <rect width="1080" height="60" fill="white"/>
+            <circle cx="30" cy="30" r="8" fill="#10B981"/>
+            <text x="60" y="25" font-family="system-ui, -apple-system, sans-serif" font-size="15" font-weight="500" fill="#0F0F0F">
+              Report Generation
+            </text>
+            <text x="60" y="43" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#737373">
+              Scheduled • Next run in 2 hours
+            </text>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- Accent Elements -->
+  <circle cx="1450" cy="150" r="80" fill="#8B5CF6" opacity="0.1"/>
+  <circle cx="150" cy="850" r="100" fill="#F59E0B" opacity="0.1"/>
+</svg>
