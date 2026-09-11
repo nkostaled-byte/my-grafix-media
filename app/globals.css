@@ -1,26 +1,121 @@
 @import "tailwindcss";
 
+/* ============================================
+   MY GRAFIX MEDIA — DESIGN SYSTEM
+   ============================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  /* Colors — Refined, primarily light palette */
+  --color-background: 250 250 250;
+  --color-foreground: 15 15 15;
+  --color-muted: 115 115 115;
+  --color-subtle: 163 163 163;
+  --color-border: 229 229 229;
+  --color-accent: 15 15 15;
+  --color-accent-muted: 82 82 82;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  /* Typography */
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  /* Spacing scale */
+  --section-spacing: 10rem;
+  --container-padding: 1.5rem;
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-@media (prefers-color-scheme: dark) {
+@media (max-width: 768px) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --section-spacing: 6rem;
+    --container-padding: 1rem;
   }
 }
 
+@theme inline {
+  /* Color tokens */
+  --color-background: rgb(var(--color-background));
+  --color-foreground: rgb(var(--color-foreground));
+  --color-muted: rgb(var(--color-muted));
+  --color-subtle: rgb(var(--color-subtle));
+  --color-border: rgb(var(--color-border));
+  --color-accent: rgb(var(--color-accent));
+  --color-accent-muted: rgb(var(--color-accent-muted));
+
+  /* Typography */
+  --font-sans: var(--font-geist-sans);
+
+  /* Custom spacing */
+  --spacing-section: var(--section-spacing);
+  --spacing-container: var(--container-padding);
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* ============================================
+   TYPOGRAPHY SYSTEM
+   ============================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.section-spacing {
+  padding-top: var(--section-spacing);
+  padding-bottom: var(--section-spacing);
+}
+
+.container-padding {
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* Focus visible styles for accessibility */
+:focus-visible {
+  outline: 2px solid rgb(var(--color-accent));
+  outline-offset: 4px;
+}
+
+/* Selection styles */
+::selection {
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
 }
