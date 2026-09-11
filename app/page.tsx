@@ -9,10 +9,39 @@ import { Services } from "@/components/home/Services";
 import { Partnership } from "@/components/home/Partnership";
 import { About } from "@/components/home/About";
 import { FinalCTA } from "@/components/home/FinalCTA";
+import {
+  generateOrganizationSchema,
+  generateWebsiteSchema,
+  generateServiceSchema,
+} from "@/lib/structured-data";
 
 export default function Home() {
+  const organizationSchema = generateOrganizationSchema();
+  const websiteSchema = generateWebsiteSchema();
+  const serviceSchema = generateServiceSchema();
+
   return (
     <>
+      {/* Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(organizationSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(websiteSchema),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(serviceSchema),
+        }}
+      />
+
       <Header />
       <main>
         <Hero />

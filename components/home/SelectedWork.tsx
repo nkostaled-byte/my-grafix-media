@@ -3,39 +3,38 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 
-// Note: Replace these with real My Grafix Media projects
+// Project data with gradient placeholders
 const projects = [
   {
     id: "project-1",
-    title: "Brand Identity & Website",
+    title: "Brand Identity & Digital Platform",
     client: "Featured Project",
     category: "Design · Digital",
     description:
-      "Complete brand system and digital presence for an ambitious business.",
-    image: "/images/projects/project-1.jpg",
+      "Complete brand system and digital presence for an ambitious business. From logo to website, creating a cohesive identity that stands out.",
+    gradient: "from-blue-500/20 via-purple-500/20 to-pink-500/20",
     href: "/work/project-1",
   },
   {
     id: "project-2",
-    title: "E-commerce Platform",
+    title: "E-commerce Experience",
     client: "Featured Project",
     category: "Digital",
     description:
-      "High-performance e-commerce experience built for scale and conversion.",
-    image: "/images/projects/project-2.jpg",
+      "High-performance e-commerce platform built for scale and conversion. Custom shopping experience with seamless checkout.",
+    gradient: "from-green-500/20 via-teal-500/20 to-blue-500/20",
     href: "/work/project-2",
   },
   {
     id: "project-3",
-    title: "AI Automation System",
+    title: "AI Workflow Automation",
     client: "Featured Project",
     category: "Intelligence",
     description:
-      "Intelligent workflow automation that saved hundreds of hours monthly.",
-    image: "/images/projects/project-3.jpg",
+      "Intelligent automation system that handles repetitive tasks and saves hundreds of hours monthly through smart workflows.",
+    gradient: "from-orange-500/20 via-red-500/20 to-pink-500/20",
     href: "/work/project-3",
   },
 ];
@@ -73,6 +72,7 @@ export function SelectedWork() {
               viewBox="0 0 16 16"
               fill="none"
               className="group-hover:translate-x-1 transition-transform"
+              aria-hidden="true"
             >
               <path
                 d="M6 3L11 8L6 13"
@@ -86,7 +86,7 @@ export function SelectedWork() {
         </motion.div>
 
         {/* Projects Grid */}
-        <div className="space-y-32 md:space-y-48">
+        <div className="space-y-24 md:space-y-32 lg:space-y-48">
           {projects.map((project, index) => (
             <ProjectCard
               key={project.id}
@@ -136,27 +136,44 @@ function ProjectCard({
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         className="block group"
+        aria-label={`View ${project.title} case study`}
       >
         <div
-          className={`grid grid-cols-1 lg:grid-cols-12 gap-12 items-center ${
+          className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center ${
             isEven ? "" : "lg:grid-flow-dense"
           }`}
         >
           {/* Image */}
           <div
-            className={`lg:col-span-7 ${isEven ? "" : "lg:col-start-6"} relative overflow-hidden bg-border rounded-2xl`}
+            className={`lg:col-span-7 ${isEven ? "" : "lg:col-start-6"} relative overflow-hidden rounded-2xl`}
           >
-            <div className="aspect-[16/10] relative">
-              {/* Placeholder for now - replace with real project images */}
-              <div className="absolute inset-0 bg-gradient-to-br from-subtle/20 to-border flex items-center justify-center">
-                <motion.div
-                  animate={isHovered ? { scale: 1.05 } : { scale: 1 }}
-                  transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
-                  className="text-subtle text-sm"
-                >
-                  Project Image
-                </motion.div>
-              </div>
+            <div className="aspect-[16/10] relative bg-gradient-to-br from-border to-background">
+              <motion.div
+                animate={isHovered ? { scale: 1.05 } : { scale: 1 }}
+                transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
+                className={`absolute inset-0 bg-gradient-to-br ${project.gradient} flex items-center justify-center`}
+              >
+                <div className="text-center p-8">
+                  <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-foreground/5 backdrop-blur-sm flex items-center justify-center">
+                    <svg
+                      width="32"
+                      height="32"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      className="text-foreground/40"
+                    >
+                      <path
+                        d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <p className="text-sm text-muted">Project Visual</p>
+                </div>
+              </motion.div>
             </div>
           </div>
 
@@ -174,12 +191,12 @@ function ProjectCard({
               <p className="text-sm text-muted mb-2">{project.client}</p>
             </div>
 
-            <p className="text-lg text-muted leading-relaxed">
+            <p className="text-base md:text-lg text-muted leading-relaxed">
               {project.description}
             </p>
 
             <div className="flex items-center gap-2 text-[15px] text-foreground group-hover:gap-3 transition-all">
-              View Case Study
+              <span>View Case Study</span>
               <motion.svg
                 width="16"
                 height="16"
@@ -187,6 +204,7 @@ function ProjectCard({
                 fill="none"
                 animate={isHovered ? { x: 4 } : { x: 0 }}
                 transition={{ duration: 0.3 }}
+                aria-hidden="true"
               >
                 <path
                   d="M3 8H13M13 8L9 4M13 8L9 12"
