@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
@@ -44,9 +45,19 @@ export function Header() {
             {/* Logo */}
             <Link
               href="/"
-              className="text-lg font-medium hover:opacity-70 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-4"
+              className="flex items-center gap-3 hover:opacity-70 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-4"
             >
-              My Grafix Media
+              <Image
+                src="/logo.png"
+                alt="My Grafix Media"
+                width={40}
+                height={40}
+                className="w-10 h-10"
+                priority
+              />
+              <span className="text-lg font-medium hidden sm:inline">
+                My Grafix Media
+              </span>
             </Link>
 
             {/* Desktop Navigation */}

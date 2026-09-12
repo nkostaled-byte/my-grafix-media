@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none">
+<defs>
+  <linearGradient id="fade" x1="250" y1="120" x2="1420" y2="850" gradientUnits="userSpaceOnUse">
+    <stop stop-color="#35ABD1" stop-opacity=".10"/><stop offset=".45" stop-color="#6E67D1" stop-opacity=".055"/><stop offset="1" stop-color="#F18954" stop-opacity="0"/>
+  </linearGradient>
+  <radialGradient id="orb" cx="0" cy="0" r="1" gradientTransform="translate(1080 330) rotate(126) scale(420 580)">
+    <stop stop-color="#D84796" stop-opacity=".07"/><stop offset="1" stop-color="#D84796" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<path d="M160 720C270 470 410 230 720 210c250-16 376 174 545 180 101 4 177-43 251-115" stroke="url(#fade)" stroke-width="2"/>
+<path d="M90 820C300 610 440 470 670 480c252 11 321 195 560 205 135 6 230-42 314-124" stroke="#374550" stroke-opacity=".07" stroke-width="1"/>
+<circle cx="1090" cy="315" r="265" fill="url(#orb)"/>
+<circle cx="1090" cy="315" r="188" stroke="#35ABD1" stroke-opacity=".12"/>
+<circle cx="1090" cy="315" r="112" stroke="#6E67D1" stroke-opacity=".12"/>
+<path d="M860 120v440M970 65v500M1080 35v540M1190 65v500M1300 120v440" stroke="#374550" stroke-opacity=".045"/>
+<path d="M760 160h650M710 280h760M710 400h760M760 520h650" stroke="#374550" stroke-opacity=".04"/>
+</svg>

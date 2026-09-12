@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none">
+<rect width="1600" height="1000" fill="#FAFAFA"/>
+<rect x="90" y="90" width="1420" height="820" rx="20" fill="white" stroke="#E5E5E5" stroke-width="3"/>
+<path d="M90 145h1420" stroke="#E5E5E5" stroke-width="3"/>
+<circle cx="125" cy="118" r="8" fill="#FF5F57"/><circle cx="151" cy="118" r="8" fill="#FFBD2E"/><circle cx="177" cy="118" r="8" fill="#28CA42"/>
+<rect x="250" y="106" width="1030" height="24" rx="12" fill="#FAFAFA"/>
+
+<rect x="145" y="190" width="1310" height="630" rx="10" fill="white"/>
+<rect x="190" y="230" width="1220" height="55" rx="8" fill="#FAFAFA"/>
+<circle cx="235" cy="257" r="15" fill="#35ABD1"/><path d="M290 257h125M1170 257h150" stroke="#374550" stroke-width="14" stroke-linecap="round" opacity=".65"/>
+<text x="240" y="390" font-family="Arial, sans-serif" font-size="70" font-weight="700" fill="#0F0F0F">Make room for</text><text x="240" y="470" font-family="Arial, sans-serif" font-size="70" font-weight="700" fill="#0F0F0F">what matters.</text>
+<rect x="240" y="530" width="190" height="54" rx="27" fill="#0F0F0F"/><text x="290" y="565" font-family="Arial, sans-serif" font-size="18" fill="white">GET STARTED</text>
+<circle cx="1130" cy="480" r="175" fill="#35ABD1" opacity=".18"/><circle cx="1130" cy="480" r="110" fill="#6E67D1" opacity=".24"/><rect x="1030" y="380" width="200" height="200" rx="36" fill="#F18954" opacity=".7" transform="rotate(15 1130 480)"/>
+<text x="240" y="735" font-family="Arial, sans-serif" font-size="22" letter-spacing="4" fill="#737373">CAMPAIGN LANDING PAGE / CONCEPT</text>
+</svg>

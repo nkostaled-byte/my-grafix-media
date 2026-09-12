@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const footerSections = [
   {
@@ -29,14 +30,21 @@ export function Footer() {
           <div className="md:col-span-5">
             <Link
               href="/"
-              className="text-xl font-medium inline-block mb-4 hover:opacity-70 transition-opacity"
+              className="inline-flex items-center gap-3 mb-4 hover:opacity-70 transition-opacity group"
             >
-              My Grafix Media
+              <Image
+                src="/logo.png"
+                alt="My Grafix Media"
+                width={40}
+                height={40}
+                className="w-10 h-10"
+              />
+              <span className="text-xl font-medium">My Grafix Media</span>
             </Link>
-            <p className="text-muted text-[15px] leading-relaxed max-w-md">
+            <p className="text-muted text-[15px] leading-relaxed max-w-md mb-4">
               Design · Digital · Intelligence
             </p>
-            <p className="text-subtle text-sm mt-4 max-w-md">
+            <p className="text-subtle text-sm max-w-md">
               Built in South Africa. Designed for everywhere.
             </p>
           </div>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none">
+<rect width="1600" height="1000" fill="#FAFAFA"/>
+<rect x="90" y="90" width="1420" height="820" rx="20" fill="white" stroke="#E5E5E5" stroke-width="3"/>
+<path d="M90 145h1420" stroke="#E5E5E5" stroke-width="3"/>
+<circle cx="125" cy="118" r="8" fill="#FF5F57"/><circle cx="151" cy="118" r="8" fill="#FFBD2E"/><circle cx="177" cy="118" r="8" fill="#28CA42"/>
+<rect x="250" y="106" width="1030" height="24" rx="12" fill="#FAFAFA"/>
+
+<rect x="145" y="190" width="1310" height="630" rx="10" fill="#FAFAFA"/>
+<rect x="220" y="250" width="530" height="450" rx="12" fill="white" stroke="#E5E5E5" stroke-width="2"/>
+<text x="275" y="350" font-family="Arial, sans-serif" font-size="52" font-weight="700" fill="#0F0F0F">BRAND</text>
+<text x="275" y="395" font-family="Arial, sans-serif" font-size="18" letter-spacing="6" fill="#737373">GUIDELINES</text>
+<path d="M275 455h310" stroke="#0F0F0F" stroke-width="3"/>
+<text x="275" y="510" font-family="Arial, sans-serif" font-size="20" fill="#374550">A visual system with</text>
+<text x="275" y="540" font-family="Arial, sans-serif" font-size="20" fill="#374550">clarity, character, and</text>
+<text x="275" y="570" font-family="Arial, sans-serif" font-size="20" fill="#374550">room to grow.</text>
+<rect x="845" y="250" width="120" height="120" rx="18" fill="#35ABD1"/><rect x="985" y="250" width="120" height="120" rx="18" fill="#F18954"/><rect x="1125" y="250" width="120" height="120" rx="18" fill="#6E67D1"/><rect x="1265" y="250" width="120" height="120" rx="18" fill="#D84796"/>
+<path d="M845 470h540M845 520h410M845 570h470" stroke="#E5E5E5" stroke-width="14" stroke-linecap="round"/>
+<text x="845" y="680" font-family="Arial, sans-serif" font-size="22" letter-spacing="4" fill="#737373">IDENTITY SYSTEM / CONCEPT</text>
+</svg>
