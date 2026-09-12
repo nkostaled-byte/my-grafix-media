@@ -6,10 +6,10 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-// Real project data with SVG mockups
+// Featured projects on homepage (showing 4 instead of 3)
 const projects = [
   {
-    id: "project-1",
+    id: "brand-identity-platform",
     title: "Brand Identity & Digital Platform",
     client: "Featured Project",
     category: "Design · Digital",
@@ -19,7 +19,7 @@ const projects = [
     href: "/work/brand-identity-platform",
   },
   {
-    id: "project-2",
+    id: "ecommerce-platform",
     title: "E-commerce Experience",
     client: "Featured Project",
     category: "Digital",
@@ -29,7 +29,7 @@ const projects = [
     href: "/work/ecommerce-platform",
   },
   {
-    id: "project-3",
+    id: "ai-automation-system",
     title: "AI Workflow Automation",
     client: "Featured Project",
     category: "Intelligence",
@@ -37,6 +37,16 @@ const projects = [
       "Intelligent automation system that handles repetitive tasks and saves hundreds of hours monthly. Custom AI agents for customer service, data processing, and reporting.",
     image: "/images/projects/ai-automation-dashboard.svg",
     href: "/work/ai-automation-system",
+  },
+  {
+    id: "crm-platform",
+    title: "CRM Dashboard Platform",
+    client: "Featured Project",
+    category: "Digital · Intelligence",
+    description:
+      "Custom CRM platform with data visualization, customer insights, automated workflows, and intelligent lead scoring powered by machine learning.",
+    image: "/images/projects/crm-dashboard.svg",
+    href: "/work/crm-platform",
   },
 ];
 

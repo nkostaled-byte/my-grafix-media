@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import Link from "next/link";
+import Image from "next/image";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/Button";
@@ -12,6 +12,7 @@ const serviceCategories = [
   {
     id: "design",
     title: "Design",
+    icon: "/images/icons/design-icon.svg",
     description:
       "Visual identity and creative work that makes your business unmistakable. From brand strategy to finished assets, we create design systems that work across every touchpoint.",
     services: [
@@ -50,6 +51,7 @@ const serviceCategories = [
   {
     id: "digital",
     title: "Digital",
+    icon: "/images/icons/digital-icon.svg",
     description:
       "Websites, platforms and digital experiences that work beautifully and perform flawlessly. We build digital products that serve your business and delight your customers.",
     services: [
@@ -88,6 +90,7 @@ const serviceCategories = [
   {
     id: "intelligence",
     title: "Intelligence",
+    icon: "/images/icons/intelligence-icon.svg",
     description:
       "AI agents, automation and intelligent systems that make your business work smarter. We build custom solutions that handle the repetitive so you can focus on what matters.",
     services: [
@@ -278,6 +281,16 @@ function ServiceCategory({
           transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
           className="mb-16 md:mb-24"
         >
+          {/* Icon */}
+          <div className="w-16 h-16 relative mb-8">
+            <Image
+              src={category.icon}
+              alt={`${category.title} icon`}
+              fill
+              className="object-contain opacity-70"
+            />
+          </div>
+
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight leading-tight mb-6">
             {category.title}
           </h2>

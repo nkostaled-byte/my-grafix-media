@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 
 const fadeInUp = {
@@ -18,8 +19,31 @@ const staggerContainer = {
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center container-padding pt-32 pb-20">
-      <div className="max-w-[1600px] mx-auto w-full">
+    <section className="relative min-h-screen flex items-center justify-center container-padding pt-32 pb-20 overflow-hidden">
+      {/* Background Accent */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-20 right-0 w-[800px] h-[800px] opacity-30">
+          <Image
+            src="/images/hero-accent.svg"
+            alt=""
+            fill
+            className="object-contain"
+            priority
+          />
+        </div>
+      </div>
+
+      {/* Grid Pattern Background */}
+      <div
+        className="absolute inset-0 opacity-[0.02] pointer-events-none"
+        style={{
+          backgroundImage: 'url(/images/patterns/grid.svg)',
+          backgroundSize: '40px 40px',
+          backgroundRepeat: 'repeat',
+        }}
+      />
+
+      <div className="max-w-[1600px] mx-auto w-full relative z-10">
         <motion.div
           variants={staggerContainer}
           initial="initial"

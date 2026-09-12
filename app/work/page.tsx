@@ -42,6 +42,50 @@ const allProjects = [
     image: "/images/projects/ai-automation-dashboard.svg",
     year: "2026",
   },
+  {
+    id: "mobile-app-development",
+    title: "Mobile Application",
+    client: "Tech Startup",
+    category: "Digital",
+    categories: ["Digital"],
+    description:
+      "Native mobile application with seamless user experience. Built for iOS and Android with offline capabilities, push notifications, and real-time sync.",
+    image: "/images/projects/mobile-app.svg",
+    year: "2026",
+  },
+  {
+    id: "brand-guidelines-system",
+    title: "Brand Guidelines & Identity System",
+    client: "Growing Business",
+    category: "Design",
+    categories: ["Design"],
+    description:
+      "Comprehensive brand guidelines system covering logo usage, typography, color palette, imagery style, and application examples across all touchpoints.",
+    image: "/images/projects/brand-guidelines.svg",
+    year: "2026",
+  },
+  {
+    id: "crm-platform",
+    title: "CRM Dashboard Platform",
+    client: "Sales Organization",
+    category: "Digital · Intelligence",
+    categories: ["Digital", "Intelligence"],
+    description:
+      "Custom CRM platform with data visualization, customer insights, automated workflows, and intelligent lead scoring powered by machine learning.",
+    image: "/images/projects/crm-dashboard.svg",
+    year: "2025",
+  },
+  {
+    id: "landing-page-optimization",
+    title: "High-Converting Landing Page",
+    client: "B2B Software Company",
+    category: "Digital",
+    categories: ["Digital"],
+    description:
+      "Conversion-optimized landing page with A/B testing, performance optimization, and strategic copywriting that increased conversions by 340%.",
+    image: "/images/projects/landing-page.svg",
+    year: "2025",
+  },
 ];
 
 const categories = ["All", "Design", "Digital", "Intelligence"];
@@ -98,9 +142,27 @@ export default function WorkPage() {
                   }`}
                 >
                   {category}
+                  {selectedCategory === category && (
+                    <motion.div
+                      layoutId="activeCategory"
+                      className="h-0.5 bg-foreground mt-1"
+                      initial={false}
+                      transition={{ duration: 0.3 }}
+                    />
+                  )}
                 </button>
               ))}
             </nav>
+          </div>
+        </section>
+
+        {/* Project Count */}
+        <section className="container-padding pt-12">
+          <div className="max-w-[1600px] mx-auto">
+            <p className="text-sm text-muted">
+              {filteredProjects.length}{" "}
+              {filteredProjects.length === 1 ? "project" : "projects"}
+            </p>
           </div>
         </section>
 

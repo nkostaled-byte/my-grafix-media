@@ -3,11 +3,13 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 
 const pillars = [
   {
     id: "design",
     title: "Design",
+    icon: "/images/icons/design-icon.svg",
     description:
       "Shape how your business looks and communicates. From brand identity to creative campaigns, we create visual systems that make you unmistakable.",
     services: [
@@ -22,6 +24,7 @@ const pillars = [
   {
     id: "digital",
     title: "Digital",
+    icon: "/images/icons/digital-icon.svg",
     description:
       "Build your digital presence and experiences. From websites to platforms, we create digital products that work beautifully and perform flawlessly.",
     services: [
@@ -36,6 +39,7 @@ const pillars = [
   {
     id: "intelligence",
     title: "Intelligence",
+    icon: "/images/icons/intelligence-icon.svg",
     description:
       "Make your business work smarter. From AI agents to automation, we build intelligent systems that handle the repetitive so you can focus on what matters.",
     services: [
@@ -114,13 +118,38 @@ function PillarItem({
       className="border-t border-border group"
     >
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 py-16 md:py-20 lg:py-24 transition-colors duration-500 hover:bg-border/20">
-        {/* Left: Title & Number */}
-        <div className="lg:col-span-4 space-y-4">
+        {/* Left: Icon, Number & Title */}
+        <div className="lg:col-span-4 space-y-6">
+          {/* Icon */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={
+              isItemInView
+                ? { opacity: 1, scale: 1 }
+                : { opacity: 0, scale: 0.8 }
+            }
+            transition={{
+              duration: 0.6,
+              delay: index * 0.2 + 0.2,
+            }}
+            className="w-16 h-16 relative mb-4"
+          >
+            <Image
+              src={pillar.icon}
+              alt={`${pillar.title} icon`}
+              fill
+              className="object-contain opacity-70 group-hover:opacity-100 transition-opacity duration-500"
+            />
+          </motion.div>
+
+          {/* Number */}
           <div className="flex items-baseline gap-4">
             <span className="text-[80px] md:text-[100px] lg:text-[120px] font-medium leading-none text-border group-hover:text-subtle transition-colors duration-500">
               0{index + 1}
             </span>
           </div>
+
+          {/* Title */}
           <h3 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight">
             {pillar.title}
           </h3>
