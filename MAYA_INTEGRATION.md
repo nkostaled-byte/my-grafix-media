@@ -75,3 +75,22 @@ Flow:
 Privacy: the microphone is only active between an explicit press and the
 final transcript; nothing is recorded in the background, and no audio or
 transcript is persisted.
+
+## OpenRouter-only chat (current)
+
+`POST /api/maya/chat` now calls OpenRouter `/api/v1/chat/completions`
+directly from the same-origin route — the same provider as voice. The
+Worker `/api/public/maya/chat` proxy is retained as legacy but is no
+longer required: the Worker's Telegram escalation hook no longer runs,
+and lead details flow back from the model JSON response shape the UI
+already renders. The site's `/api/contact` route is unchanged and still
+sends enquiries via `MAYA_API_URL` + `MAYA_CLIENT_ID`.
+
+Website runtime configuration:
+
+- `OPENROUTER_API_KEY` — required for both chat and voice.
+- `OPENROUTER_CHAT_MODEL` — optional; default `openai/gpt-4o-mini`.
+- `OPENROUTER_TTS_MODEL` — optional; default `fish-audio/s2.1-pro-free:free`.
+- `MAYA_TTS_VOICE` — optional voice id; empty = model default.
+- `MAYA_API_URL` + `MAYA_CLIENT_ID` — still required for the contact
+  form, but no longer used by Maya chat.
