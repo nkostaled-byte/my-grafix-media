@@ -13,7 +13,7 @@ The intended visual is a **continuous grey rail with square nodes sitting direct
 # THE INTENDED DESIGN
 
 There are six square nodes:
-
+jhj
 ```text id="q7b7c5"
 Website
 AI Agent
