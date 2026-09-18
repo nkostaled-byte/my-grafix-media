@@ -142,7 +142,6 @@ export function Services() {
 function ServiceCategory({
   category,
   categoryIndex,
-  onSelectService,
 }: {
   category: (typeof serviceCategories)[number];
   categoryIndex: number;
