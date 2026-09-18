@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" fill="none">
+<rect width="900" height="900" rx="36" fill="#101010"/>
+<circle cx="450" cy="430" r="285" stroke="#35ABD1" stroke-opacity=".28" stroke-width="2"/>
+<circle cx="450" cy="430" r="210" stroke="#D84796" stroke-opacity=".3" stroke-width="2"/>
+<path d="M170 430h560M205 335h490M205 525h490M450 145v570M355 165c-55 75-84 164-84 265s29 190 84 265M545 165c55 75 84 164 84 265s-29 190-84 265" stroke="#F5F5F5" stroke-opacity=".18" stroke-width="2"/>
+<circle cx="450" cy="430" r="118" fill="#374550"/>
+<text x="450" y="454" text-anchor="middle" font-family="Arial,sans-serif" font-size="112" font-weight="700" letter-spacing="-5" fill="#FAFAFA">ZA</text>
+<circle cx="450" cy="145" r="9" fill="#35ABD1"/><circle cx="698" cy="430" r="9" fill="#F18954"/><circle cx="450" cy="715" r="9" fill="#D84796"/><circle cx="202" cy="430" r="9" fill="#6E67D1"/>
+<path d="M450 145 698 430 450 715 202 430 450 145Z" stroke="#FAFAFA" stroke-opacity=".14" stroke-width="2"/>
+<text x="60" y="810" font-family="Arial,sans-serif" font-size="18" letter-spacing="5" fill="#FAFAFA" opacity=".72">BUILT IN SOUTH AFRICA</text>
+<text x="840" y="810" text-anchor="end" font-family="Arial,sans-serif" font-size="18" letter-spacing="5" fill="#FAFAFA" opacity=".52">DESIGNED FOR EVERYWHERE</text>
+</svg>

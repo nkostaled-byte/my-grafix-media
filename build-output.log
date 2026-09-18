@@ -1,0 +1,19 @@
+
+> my-grafix-media@0.1.0 build
+> next build
+
+▲ Next.js 16.3.5 (Turbopack)
+- Environments: .env.local
+⚠ Warning: Next.js ignored package-lock.json in C:\Users\Administrator\Documents\Projects because it is outside the current Git repository (C:\Users\Administrator\Documents\Projects\mygrafix-site).
+ To use this directory, set `turbopack.root` in your Next.js config.
+
+✓ Running next.config.ts took 186ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 3.1s
+  Running TypeScript ...
+components/home/Services.tsx(145,3): error TS2339: Property 'onSelectService' does not exist on type '{ category: { id: string; title: string; description: string; services: { name: string; description: string; }[]; }; categoryIndex: number; }'.
+components/motion/InteractiveGlobe.tsx(36,12): error TS7016: Could not find a declaration file for module 'three'. 'C:/Users/Administrator/Documents/Projects/mygrafix-site/node_modules/three/build/three.module.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/three` if it exists or add a new declaration (.d.ts) file containing `declare module 'three';`
+Failed to type check.
+

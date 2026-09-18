@@ -1,24 +1,41 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* ============================================
    MY GRAFIX MEDIA — DESIGN SYSTEM
+   Posture: engineered / gallery-white
+   Structure by hairline, colour used functionally only.
    ============================================ */
 
 :root {
-  /* Colors — Refined, primarily light palette */
-  --color-background: 250 250 250;
-  --color-foreground: 15 15 15;
-  --color-muted: 115 115 115;
-  --color-subtle: 163 163 163;
-  --color-border: 229 229 229;
-  --color-accent: 15 15 15;
+  /* Canvas & ink — gallery white, near-black ink (never pure black) */
+  --color-background: 255 255 255;
+  --color-foreground: 23 23 23;
+  --color-muted: 77 77 77;
+  --color-subtle: 128 128 128;
+  --color-border: 235 235 235;
+  --color-surface: 255 255 255;
+  --color-surface-raised: 250 250 250;
+
+  /* Interactive (legacy aliases kept) */
+  --color-accent: 23 23 23;
   --color-accent-muted: 82 82 82;
+
+  /* Functional accent — the ONLY colour in the UI chrome.
+     Teal darkened for accessible text contrast on white (5.8:1). */
+  --color-accent-brand: 10 106 140;
+  --color-brand-teal: 53 171 209;
 
   /* Typography */
   --font-sans: var(--font-geist-sans);
 
+  /* Radii — engineered, small */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
   /* Spacing scale */
-  --section-spacing: 10rem;
+  --section-spacing: 7.5rem;
   --container-padding: 1.5rem;
 
   /* Transitions */
@@ -28,9 +45,26 @@
 
 @media (max-width: 768px) {
   :root {
-    --section-spacing: 6rem;
-    --container-padding: 1rem;
+    --section-spacing: 4.5rem;
+    --container-padding: 1.25rem;
   }
+}
+
+html.dark {
+  color-scheme: dark;
+  --color-background: 10 10 10;
+  --color-foreground: 245 245 245;
+  --color-muted: 161 161 161;
+  --color-subtle: 128 128 128;
+  --color-border: 38 38 38;
+  --color-surface: 16 16 16;
+  --color-surface-raised: 22 22 22;
+
+  --color-accent: 245 245 245;
+  --color-accent-muted: 205 205 205;
+
+  /* Brand teal has 7:1 contrast on near-black — no darkening needed */
+  --color-accent-brand: 53 171 209;
 }
 
 @theme inline {
@@ -40,8 +74,12 @@
   --color-muted: rgb(var(--color-muted));
   --color-subtle: rgb(var(--color-subtle));
   --color-border: rgb(var(--color-border));
+  --color-surface: rgb(var(--color-surface));
+  --color-surface-raised: rgb(var(--color-surface-raised));
   --color-accent: rgb(var(--color-accent));
   --color-accent-muted: rgb(var(--color-accent-muted));
+  --color-accent-brand: rgb(var(--color-accent-brand));
+  --color-brand-teal: rgb(var(--color-brand-teal));
 
   /* Typography */
   --font-sans: var(--font-geist-sans);
@@ -63,6 +101,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  font-feature-settings: "liga" 1, "calt" 1;
 }
 
 body {
@@ -75,12 +114,14 @@ body {
 
 /* ============================================
    TYPOGRAPHY SYSTEM
+   Compression as identity: tracking tightens as size grows.
+   Three weights only — 400 read / 500 interact / 600 announce.
    ============================================ */
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
 }
 
 /* Reduced motion support */
@@ -108,14 +149,256 @@ h1, h2, h3, h4, h5, h6 {
   padding-right: var(--container-padding);
 }
 
-/* Focus visible styles for accessibility */
+/* Display type — aggressive negative tracking at scale */
+.display-xl {
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+  font-weight: 600;
+}
+
+.display-lg {
+  letter-spacing: -0.035em;
+  line-height: 1.04;
+  font-weight: 600;
+}
+
+/* Sans-serif utility labels — restrained, compact, and consistent
+   with the main Geist Sans system. */
+.kicker {
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.label-compact,
+.mono-label {
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* Shadow-as-border: hairline structure without the box model.
+   Registered via @utility so variant prefixes (hover:, focus:)
+   compile — a plain class would silently drop them.
+   Named "hairline" to avoid colliding with Tailwind's ring-<color> set. */
+@utility hairline {
+  box-shadow: 0 0 0 1px rgb(var(--color-border));
+}
+
+@utility hairline-strong {
+  box-shadow: 0 0 0 1px rgb(var(--color-foreground) / 0.18);
+}
+
+/* Layered card depth: border ring + ambient lift + inner highlight.
+   Whispers, never casts. */
+.card-elevated {
+  box-shadow:
+    0 0 0 1px rgb(var(--color-border)),
+    0 1px 2px rgb(0 0 0 / 0.04),
+    0 8px 16px -8px rgb(0 0 0 / 0.06),
+    rgb(var(--color-surface-raised)) 0 0 0 1px inset;
+}
+
+.card-hover {
+  transition: box-shadow 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+}
+
+.card-hover:hover {
+  box-shadow:
+    0 0 0 1px rgb(var(--color-foreground) / 0.14),
+    0 2px 4px rgb(0 0 0 / 0.04),
+    0 16px 32px -12px rgb(0 0 0 / 0.10),
+    rgb(var(--color-surface-raised)) 0 0 0 1px inset;
+  transform: translateY(-2px);
+}
+
+/* Theme-adaptive grid texture.
+   Uses the grid SVG as an alpha mask so the line colour follows
+   --color-foreground and stays visible in both light and dark mode. */
+.hero-grid {
+  background-color: rgb(var(--color-foreground));
+  -webkit-mask-image: url("/images/patterns/grid.svg");
+  mask-image: url("/images/patterns/grid.svg");
+  -webkit-mask-size: 48px 48px;
+  mask-size: 48px 48px;
+  -webkit-mask-repeat: repeat;
+  mask-repeat: repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+/* Focus visible — functional accent, not decoration */
 :focus-visible {
-  outline: 2px solid rgb(var(--color-accent));
-  outline-offset: 4px;
+  outline: 2px solid rgb(var(--color-accent-brand));
+  outline-offset: 2px;
+}
+
+/* Globe rotation — CSS keeps the loop off the React render path.
+   The component adds/removes the paused class based on viewport and hover,
+   so the animation holds its current frame instead of visibly restarting. */
+.globe-spin {
+  animation: globe-spin 42s linear infinite;
+  animation-play-state: running;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.globe-spin-paused {
+  animation-play-state: paused;
+}
+
+@keyframes globe-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Selection styles */
 ::selection {
   background: rgb(var(--color-foreground));
   color: rgb(var(--color-background));
+}
+
+/* ============================================
+   MOTION SYSTEM
+   One motif (drawing hairline + travelling signal),
+   one ambient (drifting grid), GPU-friendly only.
+   ============================================ */
+
+/* Signal sweep — a contained highlight travelling along a rail.
+   It begins on the rail itself and never enters from outside the line. */
+.signal-sweep {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 18%;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(var(--color-accent-brand)),
+    transparent
+  );
+  transform-origin: left center;
+  animation: signal-sweep 3.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes signal-sweep {
+  0% {
+    transform: translate3d(0, 0, 0) scaleX(0.7);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    /* --sweep-travel is set per rail so the leading edge stops exactly
+       at the drawn line's endpoint; 485.6% is the full-width default. */
+    transform: translate3d(var(--sweep-travel, 485.6%), 0, 0) scaleX(0.7);
+    opacity: 0;
+  }
+}
+
+/* Signal flow — a dash travelling along an SVG path. */
+.signal-flow {
+  pointer-events: none;
+  stroke-dasharray: 0.12 0.88;
+  animation: signal-flow 2.8s ease-in-out infinite;
+}
+
+@keyframes signal-flow {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Ambient grid drift — one tile per cycle, transform only. */
+.grid-drift {
+  animation: grid-drift 90s linear infinite;
+  will-change: transform;
+}
+
+@keyframes grid-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(48px, 48px, 0);
+  }
+}
+
+/* Ambient breathe — the hero accent expanding and settling over a long
+   cycle. Scale only, so it stays on the compositor. */
+.ambient-breathe {
+  animation: ambient-breathe 18s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes ambient-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.022);
+  }
+}
+
+/* Node pulse — living-system nodes waiting for a signal. Opacity only. */
+.node-pulse {
+  animation: node-pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes node-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.75;
+  }
+}
+
+/* Reduced motion: stop decorative loops outright rather than leaving
+   them frozen mid-cycle. The global rule above already collapses
+   durations, but these have no meaningful static end-state of their own. */
+@media (prefers-reduced-motion: reduce) {
+  .signal-sweep,
+  .signal-flow {
+    display: none;
+  }
+
+  .globe-spin {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .grid-drift {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .ambient-breathe {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .node-pulse {
+    animation: none !important;
+    opacity: 0.6;
+  }
 }

@@ -1,4 +1,3 @@
-import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/home/Hero";
 import { Introduction } from "@/components/home/Introduction";
@@ -6,6 +5,7 @@ import { Pillars } from "@/components/home/Pillars";
 import { SelectedWork } from "@/components/home/SelectedWork";
 import { SystemSection } from "@/components/home/SystemSection";
 import { Services } from "@/components/home/Services";
+import { LivingSystemSection } from "@/components/home/LivingSystemSection";
 import { Partnership } from "@/components/home/Partnership";
 import { About } from "@/components/home/About";
 import { FinalCTA } from "@/components/home/FinalCTA";
@@ -42,7 +42,6 @@ export default function Home() {
         }}
       />
 
-      <Header />
       <main>
         <Hero />
         <Introduction />
@@ -50,6 +49,7 @@ export default function Home() {
         <SelectedWork />
         <SystemSection />
         <Services />
+        <LivingSystemSection />
         <Partnership />
         <About />
         <FinalCTA />

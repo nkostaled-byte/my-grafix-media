@@ -2,17 +2,15 @@
 
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
-import Image from "next/image";
-import { Header } from "@/components/layout/Header";
+import { useRef, useState } from "react";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/Button";
+import { ServiceDetailsModal } from "@/components/ui/ServiceDetailsModal";
 
 const serviceCategories = [
   {
     id: "design",
     title: "Design",
-    icon: "/images/icons/design-icon.svg",
     description:
       "Visual identity and creative work that makes your business unmistakable. From brand strategy to finished assets, we create design systems that work across every touchpoint.",
     services: [
@@ -51,7 +49,6 @@ const serviceCategories = [
   {
     id: "digital",
     title: "Digital",
-    icon: "/images/icons/digital-icon.svg",
     description:
       "Websites, platforms and digital experiences that work beautifully and perform flawlessly. We build digital products that serve your business and delight your customers.",
     services: [
@@ -90,7 +87,6 @@ const serviceCategories = [
   {
     id: "intelligence",
     title: "Intelligence",
-    icon: "/images/icons/intelligence-icon.svg",
     description:
       "AI agents, automation and intelligent systems that make your business work smarter. We build custom solutions that handle the repetitive so you can focus on what matters.",
     services: [
@@ -131,7 +127,6 @@ const serviceCategories = [
 export default function ServicesPage() {
   return (
     <>
-      <Header />
       <main className="pt-20">
         {/* Hero Section */}
         <section className="section-spacing container-padding">
@@ -213,7 +208,7 @@ export default function ServicesPage() {
                 <div className="border-l-2 border-background/20 pl-6">
                   <h3 className="text-xl font-medium mb-3">Custom Arrangement</h3>
                   <p className="opacity-80 text-[15px] leading-relaxed">
-                    Something unique to your situation. Let's talk about what you
+                    Something unique to your situation. Let&apos;s talk about what you
                     need and find the right structure.
                   </p>
                 </div>
@@ -233,11 +228,11 @@ export default function ServicesPage() {
               className="border border-border rounded-3xl p-12 md:p-16 lg:p-20 text-center"
             >
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-tight mb-8 max-w-4xl mx-auto">
-                Let's talk about your project.
+                Let&apos;s talk about your project.
               </h2>
               <p className="text-lg md:text-xl text-muted leading-relaxed mb-12 max-w-2xl mx-auto">
                 Whether you need design, development, automation, or all three—
-                we're ready to help.
+                we&apos;re ready to help.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button href="/contact" size="large">
@@ -265,6 +260,7 @@ function ServiceCategory({
 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [selectedService, setSelectedService] = useState<(typeof category.services)[number] | null>(null);
 
   return (
     <section
@@ -281,16 +277,6 @@ function ServiceCategory({
           transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
           className="mb-16 md:mb-24"
         >
-          {/* Icon */}
-          <div className="w-16 h-16 relative mb-8">
-            <Image
-              src={category.icon}
-              alt={`${category.title} icon`}
-              fill
-              className="object-contain opacity-70"
-            />
-          </div>
-
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight leading-tight mb-6">
             {category.title}
           </h2>
@@ -301,8 +287,10 @@ function ServiceCategory({
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
           {category.services.map((service, serviceIndex) => (
-            <motion.div
+            <motion.button
+              type="button"
               key={service.name}
+              onClick={() => setSelectedService(service)}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{
@@ -310,17 +298,21 @@ function ServiceCategory({
                 ease: [0.33, 1, 0.68, 1],
                 delay: serviceIndex * 0.1,
               }}
-              className="border border-border rounded-2xl p-8 hover:border-foreground transition-colors duration-300 bg-background"
+              className="group w-full rounded-[8px] bg-background p-8 text-left hairline transition-colors duration-300 hover:hairline-strong"
             >
-              <h3 className="text-xl md:text-2xl font-medium mb-4">
+              <h3 className="display-lg mb-4 text-xl transition-colors duration-200 group-hover:text-accent-brand md:text-2xl">
                 {service.name}
               </h3>
-              <p className="text-[15px] text-muted leading-relaxed">
+              <p className="text-[15px] leading-relaxed text-muted">
                 {service.description}
               </p>
-            </motion.div>
+            </motion.button>
           ))}
         </div>
+        <ServiceDetailsModal
+          service={selectedService}
+          onClose={() => setSelectedService(null)}
+        />
       </div>
     </section>
   );

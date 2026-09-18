@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 type ButtonBaseProps = {
-  variant?: "primary" | "secondary" | "ghost";
+  variant?: "primary" | "secondary" | "ghost" | "inverse";
   size?: "default" | "large";
   children: React.ReactNode;
   className?: string;
@@ -29,20 +29,28 @@ export function Button({
   href,
   ...props
 }: ButtonProps) {
+  /* Engineered posture: compact, 6px radius, hairline structure.
+     Transitions are short and mechanical — no ease-in-out theatre.
+     active:scale gives a single frame of physical acknowledgement on
+     press; there is deliberately no hover bounce or elastic overshoot. */
   const baseStyles =
-    "inline-flex items-center justify-center font-medium transition-all duration-300 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4";
+    "inline-flex items-center justify-center gap-2 font-medium transition-all duration-200 ease-out active:scale-[0.985] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-brand disabled:opacity-50 disabled:pointer-events-none disabled:active:scale-100 whitespace-nowrap";
 
   const variants = {
     primary:
-      "bg-foreground text-background hover:bg-accent-muted focus-visible:outline-foreground",
+      "bg-foreground text-background hover:bg-foreground/88 active:bg-foreground/80",
     secondary:
-      "border border-border hover:border-foreground focus-visible:outline-foreground",
-    ghost: "hover:bg-border/50 focus-visible:outline-foreground",
+      "bg-surface text-foreground hairline hover:hairline-strong hover:bg-surface-raised",
+    ghost: "text-foreground hover:bg-foreground/[0.06]",
+    /* For use on inverted (dark) sections: inverts with the theme,
+       so it always reads as high-contrast against the section. */
+    inverse:
+      "bg-background text-foreground hover:bg-background/90 active:bg-background/80",
   };
 
   const sizes = {
-    default: "h-12 px-6 text-[15px] rounded-full",
-    large: "h-14 px-8 text-base rounded-full",
+    default: "h-10 px-4 text-sm rounded-[6px]",
+    large: "h-11 px-5 text-sm rounded-[6px]",
   };
 
   const classes = cn(baseStyles, variants[variant], sizes[size], className);

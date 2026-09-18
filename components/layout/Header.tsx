@@ -3,9 +3,11 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
+import { EASE } from "@/lib/motion";
 
 const navItems = [
   { label: "Work", href: "/work" },
@@ -17,6 +19,9 @@ const navItems = [
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const pathname = usePathname();
+  const reduce = useReducedMotion();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,73 +32,134 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const stored = window.localStorage.getItem("mygrafix-theme");
+    const nextTheme: "light" | "dark" = stored === "dark" || stored === "light"
+      ? stored
+      : window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+    document.documentElement.classList.toggle("dark", nextTheme === "dark");
+    if (nextTheme === "dark") {
+      window.setTimeout(() => setTheme(nextTheme), 0);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+    window.localStorage.setItem("mygrafix-theme", nextTheme);
+    document.documentElement.classList.toggle("dark", nextTheme === "dark");
+  };
+
   return (
     <>
       <motion.header
-        initial={{ y: -100 }}
+        initial={false}
         animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
+        transition={{ duration: 0.5, ease: EASE.out }}
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          /* Pill bar retained — large radius is the correct treatment for
+             primary navigation. Elevation whisper-level, never cast. */
+          "fixed left-1/2 top-4 z-50 w-[calc(100%-2rem)] max-w-[1060px] -translate-x-1/2 rounded-full border transition-all duration-300",
           isScrolled
-            ? "bg-background/80 backdrop-blur-md border-b border-border"
-            : "bg-transparent"
+            ? "border-border bg-background/80 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_12px_32px_-16px_rgba(0,0,0,0.18)] backdrop-blur-xl"
+            : "border-transparent bg-background/60 backdrop-blur-xl"
         )}
       >
-        <nav className="container-padding mx-auto">
-          <div className="flex items-center justify-between h-20 max-w-[1600px] mx-auto">
+        <nav className="mx-auto">
+          <div className="flex h-14 items-center justify-between px-4">
             {/* Logo */}
             <Link
               href="/"
-              className="flex items-center gap-3 hover:opacity-70 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-4"
+              onClick={(event) => {
+                if (pathname === "/") {
+                  event.preventDefault();
+                  window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+                }
+                setIsMobileMenuOpen(false);
+              }}
+              className="flex items-center gap-2.5 transition-opacity hover:opacity-70"
             >
               <Image
                 src="/logo.png"
                 alt="My Grafix Media"
-                width={40}
-                height={40}
-                className="w-10 h-10"
+                width={32}
+                height={32}
+                className="h-8 w-8"
                 priority
               />
-              <span className="text-lg font-medium hidden sm:inline">
+              <span className="hidden text-[15px] font-semibold tracking-[-0.02em] sm:inline">
                 My Grafix Media
               </span>
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="text-[15px] text-muted hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-4 rounded"
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <Button href="/contact" size="default">
-                Start a Project
-              </Button>
+            <div className="hidden md:flex items-center gap-1">
+              {navItems.map((item) => {
+                const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    aria-current={isActive ? "page" : undefined}
+                    className={cn(
+                      "group relative rounded-full px-3 py-2 text-sm transition-colors duration-200",
+                      isActive ? "text-foreground" : "text-muted hover:text-foreground"
+                    )}
+                  >
+                    {item.label}
+                    {/* Inactive links get a hairline that travels in on hover. */}
+                    {!isActive && (
+                      <span
+                        aria-hidden="true"
+                        className="absolute inset-x-2.5 -bottom-0.5 h-px origin-left scale-x-0 bg-border transition-transform duration-200 ease-out group-hover:scale-x-100"
+                      />
+                    )}
+                    {isActive && (
+                      <motion.span
+                        initial={false}
+                        layoutId="header-active-page"
+                        className="absolute inset-x-2.5 -bottom-0.5 h-px bg-accent-brand"
+                        transition={{
+                          layout: {
+                            duration: reduce ? 0 : 0.32,
+                            ease: EASE.out,
+                          },
+                          opacity: { duration: reduce ? 0 : 0.12 },
+                        }}
+                      />
+                    )}
+                  </Link>
+                );
+              })}
+              <div className="mx-2 h-5 w-px bg-border" aria-hidden="true" />
+              <ThemeToggle theme={theme} onToggle={toggleTheme} />
+              <div className="ml-2">
+                <Button href="/contact" size="default" className="!rounded-full">
+                  Start a Project
+                </Button>
+              </div>
             </div>
 
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-4 rounded"
+              className="md:hidden flex h-10 w-10 flex-col items-center justify-center gap-1.5"
               aria-label="Toggle menu"
               aria-expanded={isMobileMenuOpen}
             >
               <motion.span
                 animate={isMobileMenuOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-                className="w-6 h-0.5 bg-foreground transition-all"
+                className="h-px w-5 bg-foreground transition-all"
               />
               <motion.span
                 animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-                className="w-6 h-0.5 bg-foreground transition-all"
+                className="h-px w-5 bg-foreground transition-all"
               />
               <motion.span
                 animate={isMobileMenuOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-                className="w-6 h-0.5 bg-foreground transition-all"
+                className="h-px w-5 bg-foreground transition-all"
               />
             </button>
           </div>
@@ -110,7 +176,7 @@ export function Header() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 bg-foreground/20 backdrop-blur-sm z-40 md:hidden"
+              className="fixed inset-0 z-40 bg-foreground/20 backdrop-blur-sm md:hidden"
             />
 
             {/* Menu Panel */}
@@ -118,36 +184,58 @@ export function Header() {
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
-              transition={{ duration: 0.3, ease: [0.33, 1, 0.68, 1] }}
-              className="fixed top-20 right-0 bottom-0 w-full max-w-sm bg-background border-l border-border z-40 md:hidden"
+              transition={{ duration: 0.25, ease: EASE.out }}
+              className="fixed bottom-0 right-0 top-[4.5rem] z-40 w-full max-w-sm border-l border-border bg-background md:hidden"
             >
-              <nav className="flex flex-col p-8 gap-6">
-                {navItems.map((item, index) => (
-                  <motion.div
-                    key={item.href}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <Link
-                      href={item.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-2xl font-medium hover:text-muted transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-4 rounded block"
+              <nav className="flex flex-col gap-1 p-6">
+                {navItems.map((item, index) => {
+                  const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
+                  return (
+                    <motion.div
+                      key={item.href}
+                      initial={{ opacity: 0, x: 12 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.06 }}
                     >
-                      {item.label}
-                    </Link>
-                  </motion.div>
-                ))}
+                      <Link
+                        href={item.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        aria-current={isActive ? "page" : undefined}
+                        className={cn(
+                          "flex items-center justify-between rounded-[6px] px-3 py-3 text-base transition-colors",
+                          isActive
+                            ? "bg-surface-raised text-foreground hairline"
+                            : "text-muted hover:text-foreground"
+                        )}
+                      >
+                        {item.label}
+                        {isActive && (
+                          <span className="h-1.5 w-1.5 rounded-full bg-accent-brand" aria-hidden="true" />
+                        )}
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+
                 <motion.div
-                  initial={{ opacity: 0, x: 20 }}
+                  initial={{ opacity: 0, x: 12 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: navItems.length * 0.1 }}
-                  className="mt-4"
+                  transition={{ delay: navItems.length * 0.06 }}
+                  className="mt-4 border-t border-border pt-4"
+                >
+                  <ThemeToggle theme={theme} onToggle={toggleTheme} mobile />
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, x: 12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: (navItems.length + 1) * 0.06 }}
+                  className="mt-3"
                 >
                   <Button
                     href="/contact"
                     size="large"
-                    className="w-full"
+                    className="w-full !rounded-full"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Start a Project
@@ -159,5 +247,33 @@ export function Header() {
         )}
       </AnimatePresence>
     </>
+  );
+}
+
+function ThemeToggle({
+  theme,
+  onToggle,
+  mobile = false,
+}: {
+  theme: "light" | "dark";
+  onToggle: () => void;
+  mobile?: boolean;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+      aria-pressed={theme === "dark"}
+      className={cn(
+        "mono-label inline-flex items-center gap-2 rounded-full text-muted hairline transition-colors duration-200 hover:text-foreground hover:hairline-strong",
+        mobile ? "w-full justify-between px-3 py-2.5" : "px-2.5 py-1.5"
+      )}
+    >
+      <span aria-hidden="true" className="text-[13px] leading-none">
+        {theme === "dark" ? "☼" : "☾"}
+      </span>
+      <span>{theme === "dark" ? "Light" : "Dark"}</span>
+    </button>
   );
 }

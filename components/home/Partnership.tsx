@@ -1,9 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
 import { Button } from "@/components/ui/Button";
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
 const benefits = [
   {
@@ -29,68 +27,55 @@ const benefits = [
 ];
 
 export function Partnership() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section ref={ref} className="section-spacing container-padding bg-foreground text-background">
-      <div className="max-w-[1600px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+    <section className="section-spacing container-padding bg-foreground text-background">
+      <div className="mx-auto max-w-[1600px]">
+        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-16">
           {/* Left: Main Message */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-            transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
-            className="lg:col-span-6"
-          >
-            <p className="text-sm uppercase tracking-wider opacity-70 font-medium mb-6">
-              Creative Partnership
-            </p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-tight mb-8">
-              One partner. From first impression to intelligent operation.
+          <Reveal className="lg:col-span-6" direction="up" distance={16}>
+            <p className="kicker mb-5 text-background/55">Creative Partnership</p>
+            <h2 className="display-lg mb-6 text-3xl md:text-4xl lg:text-5xl">
+              One partner who gets the whole picture.
             </h2>
-            <p className="text-lg md:text-xl opacity-80 leading-relaxed mb-10">
-              Most businesses work with a designer for branding, a developer for
-              their website, and someone else for automation. That creates gaps,
-              delays, and inconsistency.
+            <p className="mb-8 max-w-xl text-base leading-relaxed opacity-75 md:text-lg">
+              When design, development, and automation are spread across three different vendors, nothing connects. We bring it all together under one roof.
             </p>
-            <Button
-              href="/contact"
-              variant="secondary"
-              size="large"
-              className="border-background/20 hover:border-background hover:bg-background/10 text-background"
-            >
+            <Button href="/contact" variant="inverse" size="large" className="group">
               Start a Conversation
+              <span
+                aria-hidden="true"
+                className="ml-0.5 inline-block transition-transform duration-200 ease-out group-hover:translate-x-0.5"
+              >
+                →
+              </span>
             </Button>
-          </motion.div>
+          </Reveal>
 
-          {/* Right: Benefits */}
-          <div className="lg:col-span-6">
-            <div className="space-y-8">
-              {benefits.map((benefit, index) => (
-                <motion.div
-                  key={benefit.title}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={
-                    isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }
-                  }
-                  transition={{
-                    duration: 0.8,
-                    ease: [0.33, 1, 0.68, 1],
-                    delay: index * 0.1,
-                  }}
-                  className="border-l-2 border-background/20 pl-6 hover:border-background/60 transition-colors duration-300"
-                >
-                  <h3 className="text-xl md:text-2xl font-medium mb-3">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-[15px] opacity-80 leading-relaxed">
-                    {benefit.description}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+          {/* Right: Benefits — hairline rows, no accent rails */}
+          <RevealGroup
+            stagger={0.07}
+            className="border-t border-background/15 lg:col-span-6 lg:col-start-8"
+          >
+            {benefits.map((benefit, index) => (
+              <RevealItem key={benefit.title} distance={10}>
+                <div className="group border-b border-background/15 py-6 transition-colors duration-300 last:border-b-0 hover:border-background/35">
+                  <div className="flex items-baseline gap-5">
+                    <span className="mono-label shrink-0 text-background/45 transition-colors duration-300 group-hover:text-background/80">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <div>
+                      <h3 className="mb-2 text-base font-medium transition-transform duration-300 ease-out group-hover:translate-x-0.5 md:text-lg">
+                        {benefit.title}
+                      </h3>
+                      <p className="text-sm leading-relaxed opacity-70">
+                        {benefit.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </RevealItem>
+            ))}
+          </RevealGroup>
         </div>
       </div>
     </section>

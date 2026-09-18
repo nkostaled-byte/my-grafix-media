@@ -25,42 +25,36 @@ export function Footer() {
     <footer className="border-t border-border bg-background">
       <div className="container-padding mx-auto max-w-[1600px]">
         {/* Main Footer Content */}
-        <div className="py-16 grid grid-cols-1 md:grid-cols-12 gap-12">
+        <div className="grid grid-cols-1 gap-10 py-14 md:grid-cols-12">
           {/* Brand Section */}
-          <div className="md:col-span-5">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-3 mb-4 hover:opacity-70 transition-opacity group"
-            >
+          <div className="md:col-span-6">
+            <Link href="/" className="mb-4 inline-flex items-center gap-2.5 transition-opacity hover:opacity-70">
               <Image
                 src="/logo.png"
                 alt="My Grafix Media"
-                width={40}
-                height={40}
-                className="w-10 h-10"
+                width={36}
+                height={36}
+                className="h-9 w-9"
               />
-              <span className="text-xl font-medium">My Grafix Media</span>
+              <span className="text-lg font-semibold tracking-[-0.02em]">
+                My Grafix Media
+              </span>
             </Link>
-            <p className="text-muted text-[15px] leading-relaxed max-w-md mb-4">
+            <p className="max-w-md text-sm text-subtle">
               Design · Digital · Intelligence
-            </p>
-            <p className="text-subtle text-sm max-w-md">
-              Built in South Africa. Designed for everywhere.
             </p>
           </div>
 
           {/* Links Sections */}
           {footerSections.map((section) => (
             <div key={section.title} className="md:col-span-3">
-              <h3 className="font-medium mb-4 text-sm uppercase tracking-wider">
-                {section.title}
-              </h3>
-              <ul className="space-y-3">
+              <h3 className="kicker mb-4 text-subtle">{section.title}</h3>
+              <ul className="space-y-2.5">
                 {section.links.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-muted hover:text-foreground transition-colors text-[15px]"
+                      className="text-sm text-muted transition-colors duration-200 hover:text-accent-brand"
                     >
                       {link.label}
                     </Link>
@@ -72,14 +66,14 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="py-6 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-subtle">
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-border py-6 text-sm text-subtle md:flex-row">
           <p>&copy; {new Date().getFullYear()} My Grafix Media. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link href="/privacy" className="hover:text-foreground transition-colors">
+            <Link href="/privacy" className="transition-colors duration-200 hover:text-foreground">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="hover:text-foreground transition-colors">
-              Terms of Service
+            <Link href="/terms" className="transition-colors duration-200 hover:text-foreground">
+              Terms &amp; Conditions
             </Link>
           </div>
         </div>

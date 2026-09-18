@@ -1,65 +1,63 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
 import { Button } from "@/components/ui/Button";
+import { Kicker } from "@/components/ui/Kicker";
+import { AmbientGrid } from "@/components/motion/AmbientGrid";
+import { Magnetic } from "@/components/motion/Pointer";
+import { Reveal } from "@/components/motion/Reveal";
+import { SignalRail } from "@/components/motion/Signal";
 
+/**
+ * LEVEL 2 — the closing moment.
+ *
+ * The continuity motif returns one last time: the rail that opened the
+ * hero closes the page, so the site ends where it started.
+ */
 export function FinalCTA() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section ref={ref} className="section-spacing container-padding bg-background">
-      <div className="max-w-[1600px] mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
-          className="border border-border rounded-3xl p-12 md:p-16 lg:p-20 text-center"
-        >
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.1 }}
-            className="text-sm uppercase tracking-wider text-subtle font-medium mb-6"
-          >
-            Ready to Start?
-          </motion.p>
+    <section className="section-spacing container-padding bg-background">
+      <div className="mx-auto max-w-[1600px]">
+        <Reveal direction="up" distance={18}>
+          <div className="relative overflow-hidden rounded-[12px] card-elevated p-10 md:p-16 lg:p-20">
+            <AmbientGrid className="opacity-60" duration={120} />
 
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.2 }}
-            className="text-4xl md:text-5xl lg:text-7xl font-medium tracking-tight leading-tight mb-8 max-w-4xl mx-auto"
-          >
-            Let&apos;s build something brilliant.
-          </motion.h2>
+            <div className="relative z-10 text-center">
+              <SignalRail
+                className="mx-auto mb-10 max-w-md"
+                flow={true}
+                flowDuration={2.8}
+                delay={0.2}
+              />
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.3 }}
-            className="text-lg md:text-xl text-muted leading-relaxed mb-12 max-w-2xl mx-auto"
-          >
-            Whether you need a complete brand system, a high-performance website,
-            or intelligent automation—let&apos;s talk about what you&apos;re building.
-          </motion.p>
+              <Kicker className="mb-6">Ready to Start?</Kicker>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Button href="/contact" size="large">
-              Start a Project
-            </Button>
-            <Button href="/work" variant="secondary" size="large">
-              View Our Work
-            </Button>
-          </motion.div>
-        </motion.div>
+              <h2 className="display-lg mx-auto mb-6 max-w-3xl text-3xl md:text-5xl lg:text-6xl">
+                Ready to start a project?
+              </h2>
+
+              <p className="mx-auto mb-9 max-w-xl text-base leading-relaxed text-muted md:text-lg">
+                Tell us what you're building. We'll handle the design, the website, the automation, or all three.
+              </p>
+
+              <div className="flex flex-col justify-center gap-3 sm:flex-row">
+                <Magnetic strength={4} className="inline-flex justify-center">
+                  <Button href="/contact" size="large" className="group">
+                    Start a Project
+                    <span
+                      aria-hidden="true"
+                      className="ml-0.5 inline-block transition-transform duration-200 ease-out group-hover:translate-x-0.5"
+                    >
+                      →
+                    </span>
+                  </Button>
+                </Magnetic>
+                <Button href="/work" variant="secondary" size="large">
+                  View Our Work
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

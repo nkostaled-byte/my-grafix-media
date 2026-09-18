@@ -1,94 +1,57 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
 import { Button } from "@/components/ui/Button";
+import { Kicker } from "@/components/ui/Kicker";
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
 export function About() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section ref={ref} className="section-spacing container-padding bg-background">
-      <div className="max-w-[1600px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-          {/* Left: Label */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
-            className="lg:col-span-4"
-          >
-            <p className="text-sm uppercase tracking-wider text-subtle font-medium">
-              About My Grafix Media
-            </p>
-          </motion.div>
+    <section className="section-spacing container-padding bg-background">
+      <div className="mx-auto max-w-[1600px]">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-16">
+          <Reveal className="lg:col-span-3" direction="up" distance={12}>
+            <Kicker>About My Grafix Media</Kicker>
+          </Reveal>
 
-          {/* Right: Content */}
-          <div className="lg:col-span-8 space-y-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.1 }}
-            >
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight leading-tight mb-6">
-                We believe ambitious businesses deserve a partner who can do more
-                than one thing well.
+          <div className="space-y-6 lg:col-span-9">
+            <Reveal>
+              <h2 className="display-lg mb-6 max-w-4xl text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem]">
+                We're a design, development, and automation studio. All three. Under one roof.
               </h2>
-            </motion.div>
+            </Reveal>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.2 }}
-              className="space-y-6 text-lg text-muted leading-relaxed"
+            <RevealGroup
+              stagger={0.07}
+              className="max-w-2xl space-y-5 text-base leading-relaxed text-muted md:text-lg"
             >
-              <p>
-                My Grafix Media combines design, digital development, and
-                intelligent automation into one capable creative partner. We work
-                with businesses that are ready to stand out, operate smarter, and
-                grow confidently.
-              </p>
+              <RevealItem>
+                <p>
+                  Most businesses need all three services. But they get them from different vendors, which means nothing connects properly. We handle design, websites, and automation as one complete system.
+                </p>
+              </RevealItem>
+              <RevealItem>
+                <p>
+                  That means your brand guides your website, your website connects to your systems, and your automation does the work your team shouldn't have to do by hand.
+                </p>
+              </RevealItem>
+              <RevealItem>
+                <p>
+                  We work with businesses that want to grow. We bring the skills to do the work without forcing you to manage multiple vendors or watch projects fall apart between teams.
+                </p>
+              </RevealItem>
+            </RevealGroup>
 
-              <p>
-                Whether you need a complete brand system, a high-performance
-                website, or AI agents that automate your workflows—we bring the
-                expertise to make it happen without forcing you to manage multiple
-                vendors.
-              </p>
-
-              <p>
-                We're a South African agency building for businesses everywhere.
-                That means world-class work, thoughtful execution, and the kind of
-                partnership that helps you move forward.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.3 }}
-              className="pt-6"
-            >
-              <div className="inline-flex items-center gap-3 text-subtle text-sm">
-                <div className="w-2 h-2 bg-subtle rounded-full" />
-                <span className="font-medium">
-                  Built in South Africa. Designed for everywhere.
-                </span>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.4 }}
-              className="pt-8"
-            >
-              <Button href="/about" variant="secondary" size="large">
+            <Reveal delay={0.1}>
+              <Button href="/about" variant="secondary" size="large" className="group">
                 Learn More About Us
+                <span
+                  aria-hidden="true"
+                  className="ml-0.5 inline-block transition-transform duration-200 ease-out group-hover:translate-x-0.5"
+                >
+                  →
+                </span>
               </Button>
-            </motion.div>
+            </Reveal>
           </div>
         </div>
       </div>

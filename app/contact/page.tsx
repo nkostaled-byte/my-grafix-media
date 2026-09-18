@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 
 const projectTypes = [
@@ -56,17 +55,22 @@ export default function ContactPage() {
     setStatus({ type: "loading", message: "Sending..." });
 
     try {
-      // For now, just simulate a successful submission
-      // In production, you'd send this to your backend/API
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const result = await response.json().catch(() => null);
+      if (!response.ok || !result?.success) {
+        throw new Error(result?.error || "Submission failed");
+      }
 
       setStatus({
         type: "success",
         message:
-          "Thanks for reaching out! We'll get back to you within 24 hours.",
+          "Thanks for reaching out! Your enquiry has been received and we’ll get back to you within 24 hours.",
       });
 
-      // Reset form
       setFormData({
         name: "",
         company: "",
@@ -76,10 +80,10 @@ export default function ContactPage() {
         budget: "",
         timeline: "",
       });
-    } catch (error) {
+    } catch {
       setStatus({
         type: "error",
-        message: "Something went wrong. Please try again or email us directly.",
+        message: "We couldn’t send your enquiry. Please try again or email us directly.",
       });
     }
   };
@@ -97,7 +101,6 @@ export default function ContactPage() {
 
   return (
     <>
-      <Header />
       <main className="pt-20">
         {/* Hero Section */}
         <section className="section-spacing container-padding">
@@ -114,11 +117,11 @@ export default function ContactPage() {
                   Contact
                 </p>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-tight mb-8">
-                  Let's build something brilliant.
+                  Let&apos;s build something brilliant.
                 </h1>
                 <p className="text-lg text-muted leading-relaxed mb-12">
                   Whether you need design, development, automation, or all
-                  three—we're ready to help. Tell us about your project and we'll
+                  three—we&apos;re ready to help. Tell us about your project and we&apos;ll
                   get back to you within 24 hours.
                 </p>
 
@@ -134,17 +137,6 @@ export default function ContactPage() {
                     >
                       hello@mygrafixmedia.com
                     </a>
-                  </div>
-
-                  <div>
-                    <h2 className="text-sm font-medium uppercase tracking-wider mb-2">
-                      Location
-                    </h2>
-                    <p className="text-lg text-muted">
-                      South Africa
-                      <br />
-                      Working with clients worldwide
-                    </p>
                   </div>
                 </div>
               </motion.div>
@@ -261,7 +253,7 @@ export default function ContactPage() {
                       value={formData.details}
                       onChange={handleChange}
                       className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-foreground focus:border-transparent transition-all bg-background resize-none"
-                      placeholder="Tell us about your project, goals, and what you're hoping to achieve..."
+                      placeholder="Tell us about your project, goals, and what you&apos;re hoping to achieve..."
                     />
                   </div>
 
@@ -341,7 +333,7 @@ export default function ContactPage() {
                   </button>
 
                   <p className="text-sm text-muted text-center">
-                    We'll get back to you within 24 hours
+                    We&apos;ll get back to you within 24 hours
                   </p>
                 </form>
               </motion.div>

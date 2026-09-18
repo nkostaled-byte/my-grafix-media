@@ -1,17 +1,22 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
-import Image from "next/image";
+import { Kicker } from "@/components/ui/Kicker";
+import { PillarVisual } from "@/components/motion/PillarVisual";
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 
-const pillars = [
+type Variant = "design" | "digital" | "intelligence";
+
+const pillars: {
+  id: Variant;
+  title: string;
+  description: string;
+  services: string[];
+}[] = [
   {
     id: "design",
     title: "Design",
-    icon: "/images/icons/design-icon.svg",
     description:
-      "Shape how your business looks and communicates. From brand identity to creative campaigns, we create visual systems that make you unmistakable.",
+      "How your business looks matters. We create brand identities, graphic design, campaigns, and marketing materials that people actually notice.",
     services: [
       "Brand Identity",
       "Graphic Design",
@@ -24,9 +29,8 @@ const pillars = [
   {
     id: "digital",
     title: "Digital",
-    icon: "/images/icons/digital-icon.svg",
     description:
-      "Build your digital presence and experiences. From websites to platforms, we create digital products that work beautifully and perform flawlessly.",
+      "A website that works. We build fast, reliable websites and platforms that your customers actually enjoy using.",
     services: [
       "Websites",
       "E-commerce",
@@ -39,9 +43,8 @@ const pillars = [
   {
     id: "intelligence",
     title: "Intelligence",
-    icon: "/images/icons/intelligence-icon.svg",
     description:
-      "Make your business work smarter. From AI agents to automation, we build intelligent systems that handle the repetitive so you can focus on what matters.",
+      "Automation saves time. We build AI agents and systems that handle your repetitive tasks, so your team can focus on what actually needs a person.",
     services: [
       "AI Agents",
       "AI Assistants",
@@ -54,36 +57,21 @@ const pillars = [
 ];
 
 export function Pillars() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-150px" });
-
   return (
-    <section ref={ref} className="section-spacing container-padding bg-background">
-      <div className="max-w-[1600px] mx-auto">
+    <section className="section-spacing container-padding bg-background">
+      <div className="mx-auto max-w-[1600px]">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
-          className="mb-20 md:mb-32"
-        >
-          <p className="text-sm uppercase tracking-wider text-subtle font-medium mb-6">
-            Three Capabilities. One Partner.
-          </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-tight max-w-4xl">
+        <Reveal className="mb-16 md:mb-20">
+          <Kicker className="mb-5">Three Capabilities. One Partner.</Kicker>
+          <h2 className="display-lg max-w-3xl text-3xl md:text-4xl lg:text-5xl">
             Design · Digital · Intelligence
           </h2>
-        </motion.div>
+        </Reveal>
 
-        {/* Pillars Grid */}
-        <div className="space-y-0">
+        {/* Pillars — hairline-ruled rows */}
+        <div className="border-b border-border">
           {pillars.map((pillar, index) => (
-            <PillarItem
-              key={pillar.id}
-              pillar={pillar}
-              index={index}
-              isInView={isInView}
-            />
+            <PillarRow key={pillar.id} pillar={pillar} index={index} />
           ))}
         </div>
       </div>
@@ -91,99 +79,52 @@ export function Pillars() {
   );
 }
 
-function PillarItem({
+function PillarRow({
   pillar,
   index,
-  isInView,
 }: {
-  pillar: (typeof pillars)[0];
+  pillar: (typeof pillars)[number];
   index: number;
-  isInView: boolean;
 }) {
-  const itemRef = useRef(null);
-  const isItemInView = useInView(itemRef, { once: true, margin: "-100px" });
-
   return (
-    <motion.div
-      ref={itemRef}
-      initial={{ opacity: 0, y: 40 }}
-      animate={
-        isInView && isItemInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }
-      }
-      transition={{
-        duration: 0.8,
-        ease: [0.33, 1, 0.68, 1],
-        delay: index * 0.2,
-      }}
-      className="border-t border-border group"
-    >
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 py-16 md:py-20 lg:py-24 transition-colors duration-500 hover:bg-border/20">
-        {/* Left: Icon, Number & Title */}
-        <div className="lg:col-span-4 space-y-6">
-          {/* Icon */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={
-              isItemInView
-                ? { opacity: 1, scale: 1 }
-                : { opacity: 0, scale: 0.8 }
-            }
-            transition={{
-              duration: 0.6,
-              delay: index * 0.2 + 0.2,
-            }}
-            className="w-16 h-16 relative mb-4"
-          >
-            <Image
-              src={pillar.icon}
-              alt={`${pillar.title} icon`}
-              fill
-              className="object-contain opacity-70 group-hover:opacity-100 transition-opacity duration-500"
-            />
-          </motion.div>
-
-          {/* Number */}
-          <div className="flex items-baseline gap-4">
-            <span className="text-[80px] md:text-[100px] lg:text-[120px] font-medium leading-none text-border group-hover:text-subtle transition-colors duration-500">
-              0{index + 1}
-            </span>
-          </div>
-
-          {/* Title */}
-          <h3 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight">
+    <div className="group border-t border-border">
+      <div className="grid grid-cols-1 gap-8 py-12 transition-colors duration-300 md:py-16 lg:grid-cols-12 lg:gap-16">
+        {/* Index, title, and this capability's own visual behaviour */}
+        <Reveal className="lg:col-span-4" direction="up" distance={16}>
+          <span className="mono-label mb-4 block text-subtle transition-colors duration-300 group-hover:text-accent-brand">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <h3 className="display-lg mb-6 text-3xl transition-colors duration-300 group-hover:text-accent-brand md:text-4xl lg:text-5xl">
             {pillar.title}
           </h3>
-        </div>
 
-        {/* Right: Description & Services */}
-        <div className="lg:col-span-8 space-y-8">
-          <p className="text-lg md:text-xl text-muted leading-relaxed max-w-2xl">
-            {pillar.description}
-          </p>
-
-          {/* Services Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 pt-4">
-            {pillar.services.map((service, serviceIndex) => (
-              <motion.div
-                key={service}
-                initial={{ opacity: 0, x: -10 }}
-                animate={
-                  isItemInView
-                    ? { opacity: 1, x: 0 }
-                    : { opacity: 0, x: -10 }
-                }
-                transition={{
-                  duration: 0.5,
-                  delay: index * 0.2 + serviceIndex * 0.05,
-                }}
-                className="text-[15px] text-subtle group-hover:text-muted transition-colors duration-300"
-              >
-                {service}
-              </motion.div>
-            ))}
+          <div className="aspect-[16/9] max-w-[320px] overflow-hidden rounded-[8px] bg-surface-raised p-4 hairline transition-shadow duration-300 group-hover:shadow-[0_0_0_1px_rgb(var(--color-foreground)/0.14)]">
+            <PillarVisual variant={pillar.id} />
           </div>
+        </Reveal>
+
+        {/* Description and capabilities */}
+        <div className="lg:col-span-8">
+          <Reveal delay={0.06}>
+            <p className="mb-7 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
+              {pillar.description}
+            </p>
+          </Reveal>
+
+          <RevealGroup
+            stagger={0.04}
+            className="grid grid-cols-2 gap-px overflow-hidden rounded-[8px] border border-border bg-border md:grid-cols-3"
+          >
+            {pillar.services.map((service) => (
+              <RevealItem key={service} distance={8}>
+                <div className="mono-label h-full bg-surface px-4 py-3 text-muted transition-colors duration-200 hover:text-foreground">
+                  {service}
+                </div>
+              </RevealItem>
+            ))}
+          </RevealGroup>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

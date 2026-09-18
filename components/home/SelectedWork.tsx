@@ -1,12 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
+import { Kicker } from "@/components/ui/Kicker";
+import { ThemeProjectImage } from "@/components/ui/ThemeProjectImage";
+import { PointerShift } from "@/components/motion/Pointer";
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
+import { EASE, VIEWPORT } from "@/lib/motion";
 
-// Featured projects on homepage (showing 4 instead of 3)
+// Featured projects on homepage
 const projects = [
   {
     id: "brand-identity-platform",
@@ -14,7 +17,7 @@ const projects = [
     client: "Featured Project",
     category: "Design · Digital",
     description:
-      "Complete brand system and digital presence. From logo design to fully responsive website, creating a cohesive identity that stands out in a competitive market.",
+      "Complete brand system and website. Logo design through a fully responsive site, all working together visually.",
     image: "/images/projects/brand-identity-website.svg",
     href: "/work/brand-identity-platform",
   },
@@ -24,7 +27,7 @@ const projects = [
     client: "Featured Project",
     category: "Digital",
     description:
-      "High-performance e-commerce platform built for scale and conversion. Custom shopping experience with seamless checkout, inventory management, and analytics.",
+      "Online store built for speed and sales. Fast checkout, inventory management that works, built-in analytics.",
     image: "/images/projects/ecommerce-platform.svg",
     href: "/work/ecommerce-platform",
   },
@@ -34,7 +37,7 @@ const projects = [
     client: "Featured Project",
     category: "Intelligence",
     description:
-      "Intelligent automation system that handles repetitive tasks and saves hundreds of hours monthly. Custom AI agents for customer service, data processing, and reporting.",
+      "Automation system that handles repetitive work. AI agents for customer service, data processing, and reports. Saves hundreds of hours monthly.",
     image: "/images/projects/ai-automation-dashboard.svg",
     href: "/work/ai-automation-system",
   },
@@ -44,67 +47,69 @@ const projects = [
     client: "Featured Project",
     category: "Digital · Intelligence",
     description:
-      "Custom CRM platform with data visualization, customer insights, automated workflows, and intelligent lead scoring powered by machine learning.",
+      "Custom CRM with data visualization, customer insights, automated workflows, and lead scoring powered by machine learning.",
     image: "/images/projects/crm-dashboard.svg",
     href: "/work/crm-platform",
   },
 ];
 
+/**
+ * LEVEL 2 — the gallery.
+ *
+ * The work is the subject, so the motion stays out of its way: each
+ * frame wipes open once as it enters, then sits still. On a pointer
+ * device the artwork drifts a few pixels inside its frame, which reads
+ * as depth without moving the composition.
+ */
 export function SelectedWork() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section ref={ref} className="section-spacing container-padding bg-background">
-      <div className="max-w-[1600px] mx-auto">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
-          className="mb-16 md:mb-24 flex flex-col md:flex-row md:items-end md:justify-between gap-8"
+    <section className="section-spacing container-padding bg-background">
+      <div className="mx-auto max-w-[1600px]">
+        {/* Section Header — label left, action right */}
+        <Reveal
+          className="mb-14 flex flex-col gap-6 border-b border-border pb-6 md:mb-20 md:flex-row md:items-end md:justify-between"
+          distance={16}
         >
           <div>
-            <p className="text-sm uppercase tracking-wider text-subtle font-medium mb-4">
-              Selected Work
-            </p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-tight">
+            <Kicker className="mb-4">Selected Work</Kicker>
+            <h2 className="display-lg text-3xl md:text-4xl lg:text-5xl">
               Recent Projects
             </h2>
           </div>
           <Link
             href="/work"
-            className="text-[15px] text-muted hover:text-foreground transition-colors inline-flex items-center gap-2 group"
+            className="mono-label group inline-flex items-center gap-2 text-muted transition-colors duration-200 hover:text-accent-brand"
           >
-            View All Work
+            <span className="relative">
+              View All Work
+              <span
+                aria-hidden="true"
+                className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-accent-brand transition-transform duration-300 ease-out group-hover:scale-x-100"
+              />
+            </span>
             <svg
-              width="16"
-              height="16"
+              width="14"
+              height="14"
               viewBox="0 0 16 16"
               fill="none"
-              className="group-hover:translate-x-1 transition-transform"
+              className="transition-transform duration-200 ease-out group-hover:translate-x-0.5"
               aria-hidden="true"
             >
               <path
                 d="M6 3L11 8L6 13"
                 stroke="currentColor"
-                strokeWidth="2"
+                strokeWidth="1.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
             </svg>
           </Link>
-        </motion.div>
+        </Reveal>
 
-        {/* Projects Grid */}
-        <div className="space-y-24 md:space-y-32 lg:space-y-48">
+        {/* Projects */}
+        <div className="space-y-20 md:space-y-28">
           {projects.map((project, index) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              index={index}
-              isInView={isInView}
-            />
+            <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>
       </div>
@@ -115,107 +120,110 @@ export function SelectedWork() {
 function ProjectCard({
   project,
   index,
-  isInView,
 }: {
-  project: (typeof projects)[0];
+  project: (typeof projects)[number];
   index: number;
-  isInView: boolean;
 }) {
-  const cardRef = useRef(null);
-  const isCardInView = useInView(cardRef, { once: true, margin: "-150px" });
   const [isHovered, setIsHovered] = useState(false);
 
   const isEven = index % 2 === 0;
 
   return (
-    <motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, y: 60 }}
-      animate={
-        isInView && isCardInView
-          ? { opacity: 1, y: 0 }
-          : { opacity: 0, y: 60 }
-      }
-      transition={{
-        duration: 1,
-        ease: [0.33, 1, 0.68, 1],
-        delay: index * 0.2,
-      }}
-    >
-      <Link
-        href={project.href}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        className="block group"
-        aria-label={`View ${project.title} case study`}
-      >
-        <div
-          className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center ${
-            isEven ? "" : "lg:grid-flow-dense"
-          }`}
+    <Reveal distance={22}>
+      <div>
+        <Link
+          href={project.href}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          className="group block"
+          aria-label={`View ${project.title} case study`}
         >
-          {/* Image */}
           <div
-            className={`lg:col-span-7 ${isEven ? "" : "lg:col-start-6"} relative overflow-hidden rounded-2xl bg-white border border-border`}
+            className={`grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12 ${
+              isEven ? "" : "lg:grid-flow-dense"
+            }`}
           >
-            <div className="aspect-[16/10] relative">
-              <motion.div
-                animate={isHovered ? { scale: 1.05 } : { scale: 1 }}
-                transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
-                className="w-full h-full"
-              >
-                <Image
-                  src={project.image}
-                  alt={`${project.title} - ${project.description}`}
-                  fill
-                  className="object-contain p-8"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 50vw"
+            {/* Product surface — framed as evidence */}
+            <div
+              className={`relative overflow-hidden rounded-[8px] bg-surface-raised hairline card-hover lg:col-span-7 ${
+                isEven ? "" : "lg:col-start-6"
+              }`}
+            >
+              <div className="relative aspect-[16/10]">
+                <PointerShift className="absolute inset-0" strength={10}>
+                  <motion.div
+                    className="relative h-full w-full"
+                    animate={{ scale: isHovered ? 1.03 : 1 }}
+                    transition={{ duration: 0.5, ease: EASE.out }}
+                  >
+                    <ThemeProjectImage
+                      src={project.image}
+                      alt={`${project.title} - ${project.description}`}
+                      className="object-contain p-6"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 50vw"
+                    />
+                  </motion.div>
+                </PointerShift>
+
+                {/* Curtain that wipes the frame open once, on entry */}
+                <motion.div
+                  aria-hidden="true"
+                  className="absolute inset-0 origin-top bg-background"
+                  initial={{ scaleY: 1 }}
+                  whileInView={{ scaleY: 0 }}
+                  viewport={VIEWPORT}
+                  transition={{ duration: 0.85, ease: EASE.inOut, delay: 0.05 }}
                 />
-              </motion.div>
+              </div>
             </div>
+
+            {/* Content */}
+            <RevealGroup
+              stagger={0.06}
+              className={`space-y-5 lg:col-span-5 ${
+                isEven ? "" : "lg:col-start-1 lg:row-start-1"
+              }`}
+            >
+              <RevealItem>
+                <p className="mono-label mb-3 text-subtle">{project.category}</p>
+                <h3 className="display-lg mb-3 text-2xl transition-colors duration-300 group-hover:text-accent-brand md:text-3xl lg:text-4xl">
+                  {project.title}
+                </h3>
+                <p className="mono-label text-subtle">{project.client}</p>
+              </RevealItem>
+
+              <RevealItem>
+                <p className="text-sm leading-relaxed text-muted md:text-base">
+                  {project.description}
+                </p>
+              </RevealItem>
+
+              <RevealItem>
+                <div className="mono-label flex items-center gap-2 text-foreground">
+                  <span>View Case Study</span>
+                  <motion.svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    animate={isHovered ? { x: 3 } : { x: 0 }}
+                    transition={{ duration: 0.25 }}
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M3 8H13M13 8L9 4M13 8L9 12"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </motion.svg>
+                </div>
+              </RevealItem>
+            </RevealGroup>
           </div>
-
-          {/* Content */}
-          <div
-            className={`lg:col-span-5 ${isEven ? "" : "lg:col-start-1 lg:row-start-1"} space-y-6`}
-          >
-            <div>
-              <p className="text-sm text-subtle uppercase tracking-wider mb-3">
-                {project.category}
-              </p>
-              <h3 className="text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight leading-tight mb-4 group-hover:text-muted transition-colors duration-300">
-                {project.title}
-              </h3>
-              <p className="text-sm text-muted mb-2">{project.client}</p>
-            </div>
-
-            <p className="text-base md:text-lg text-muted leading-relaxed">
-              {project.description}
-            </p>
-
-            <div className="flex items-center gap-2 text-[15px] text-foreground group-hover:gap-3 transition-all">
-              <span>View Case Study</span>
-              <motion.svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                animate={isHovered ? { x: 4 } : { x: 0 }}
-                transition={{ duration: 0.3 }}
-                aria-hidden="true"
-              >
-                <path
-                  d="M3 8H13M13 8L9 4M13 8L9 12"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </motion.svg>
-            </div>
-          </div>
-        </div>
-      </Link>
-    </motion.div>
+        </Link>
+      </div>
+    </Reveal>
   );
 }

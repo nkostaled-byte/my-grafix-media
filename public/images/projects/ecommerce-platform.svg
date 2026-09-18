@@ -1,111 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" fill="none">
-  <!-- Background -->
-  <rect width="1600" height="1000" fill="#FAFAFA"/>
-
-  <!-- Browser Window -->
-  <g transform="translate(100, 100)">
-    <!-- Window Chrome -->
-    <rect width="1400" height="800" rx="12" fill="white" stroke="#E5E5E5" stroke-width="2"/>
-    <rect width="1400" height="40" fill="#F5F5F5" stroke="#E5E5E5" stroke-width="2"/>
-
-    <!-- Traffic Lights -->
-    <circle cx="20" cy="20" r="6" fill="#FF5F57"/>
-    <circle cx="40" cy="20" r="6" fill="#FFBD2E"/>
-    <circle cx="60" cy="20" r="6" fill="#28CA42"/>
-
-    <!-- Address Bar -->
-    <rect x="90" y="12" width="1220" height="16" rx="8" fill="white" stroke="#E5E5E5" stroke-width="1"/>
-    <text x="110" y="23" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#737373">
-      https://shop.example.com
-    </text>
-
-    <!-- E-commerce Interface -->
-    <g transform="translate(0, 50)">
-      <!-- Header with Cart -->
-      <rect width="1400" height="60" fill="white"/>
-      <text x="50" y="35" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="600" fill="#0F0F0F">
-        STORE
-      </text>
-
-      <!-- Cart Icon -->
-      <g transform="translate(1320, 20)">
-        <circle cx="10" cy="10" r="4" fill="#0F0F0F"/>
-        <text x="18" y="0" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#0F0F0F">
-          3
-        </text>
-      </g>
-
-      <!-- Product Grid -->
-      <g transform="translate(50, 100)">
-        <!-- Product 1 -->
-        <g>
-          <rect width="320" height="320" rx="8" fill="#F5F5F5"/>
-          <rect y="330" width="320" height="100" fill="white"/>
-          <text x="10" y="355" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="500" fill="#0F0F0F">
-            Product Name
-          </text>
-          <text x="10" y="380" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="600" fill="#0F0F0F">
-            $199.00
-          </text>
-
-          <!-- Product Image Placeholder -->
-          <circle cx="160" cy="160" r="60" fill="white" opacity="0.5"/>
-        </g>
-
-        <!-- Product 2 -->
-        <g transform="translate(360, 0)">
-          <rect width="320" height="320" rx="8" fill="#F5F5F5"/>
-          <rect y="330" width="320" height="100" fill="white"/>
-          <text x="10" y="355" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="500" fill="#0F0F0F">
-            Product Name
-          </text>
-          <text x="10" y="380" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="600" fill="#0F0F0F">
-            $149.00
-          </text>
-
-          <circle cx="160" cy="160" r="60" fill="white" opacity="0.5"/>
-        </g>
-
-        <!-- Product 3 -->
-        <g transform="translate(720, 0)">
-          <rect width="320" height="320" rx="8" fill="#F5F5F5"/>
-          <rect y="330" width="320" height="100" fill="white"/>
-          <text x="10" y="355" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="500" fill="#0F0F0F">
-            Product Name
-          </text>
-          <text x="10" y="380" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="600" fill="#0F0F0F">
-            $249.00
-          </text>
-
-          <circle cx="160" cy="160" r="60" fill="white" opacity="0.5"/>
-        </g>
-
-        <!-- Product 4 -->
-        <g transform="translate(1080, 0)">
-          <rect width="270" height="320" rx="8" fill="#F5F5F5"/>
-          <rect y="330" width="270" height="100" fill="white"/>
-          <text x="10" y="355" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="500" fill="#0F0F0F">
-            Product Name
-          </text>
-          <text x="10" y="380" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="600" fill="#0F0F0F">
-            $179.00
-          </text>
-
-          <circle cx="135" cy="160" r="60" fill="white" opacity="0.5"/>
-        </g>
-      </g>
-
-      <!-- Add to Cart Buttons -->
-      <g transform="translate(50, 520)">
-        <rect width="320" height="40" rx="20" fill="#0F0F0F"/>
-        <rect x="360" width="320" height="40" rx="20" fill="#0F0F0F"/>
-        <rect x="720" width="320" height="40" rx="20" fill="#0F0F0F"/>
-        <rect x="1080" width="270" height="40" rx="20" fill="#0F0F0F"/>
-      </g>
-    </g>
+<rect width="1600" height="1000" fill="#FAFAFA"/>
+<g transform="translate(100 100)">
+  <rect width="1400" height="800" rx="18" fill="white" stroke="#E5E5E5" stroke-width="3"/>
+  <rect width="1400" height="44" rx="18" fill="#F5F5F5"/><path d="M0 44h1400" stroke="#E5E5E5" stroke-width="2"/>
+  <circle cx="22" cy="22" r="7" fill="#FF5F57"/><circle cx="46" cy="22" r="7" fill="#FFBD2E"/><circle cx="70" cy="22" r="7" fill="#28CA42"/>
+  <rect x="180" y="12" width="1040" height="20" rx="10" fill="white" stroke="#E5E5E5"/>
+  <text x="205" y="26" font-family="Arial,sans-serif" font-size="11" fill="#737373">shop.example.com</text>
+  <rect y="44" width="1400" height="72" fill="white"/>
+  <text x="55" y="88" font-family="Arial,sans-serif" font-size="22" font-weight="700" letter-spacing="3" fill="#374550">FIELD / OBJECTS</text>
+  <text x="1050" y="88" font-family="Arial,sans-serif" font-size="14" fill="#737373">COLLECTION</text>
+  <text x="1170" y="88" font-family="Arial,sans-serif" font-size="14" fill="#737373">BAG (3)</text>
+  <g transform="translate(55 155)">
+    <text x="0" y="54" font-family="Arial,sans-serif" font-size="54" font-weight="700" fill="#0F0F0F">Everyday objects,</text>
+    <text x="0" y="112" font-family="Arial,sans-serif" font-size="54" font-weight="700" fill="#0F0F0F">considered.</text>
+    <text x="0" y="155" font-family="Arial,sans-serif" font-size="18" fill="#737373">A focused collection for work, travel, and home.</text>
   </g>
-
-  <!-- Decorative Elements -->
-  <circle cx="1500" cy="100" r="50" fill="#10B981" opacity="0.1"/>
-  <circle cx="100" cy="900" r="80" fill="#3B82F6" opacity="0.1"/>
+  <g transform="translate(55 350)">
+    <g><rect width="285" height="280" rx="14" fill="#EAF8FB"/><path d="M88 170 135 85l75 0 45 85-28 42H115l-27-42Z" fill="#35ABD1"/><path d="M150 85v-28h45v28" stroke="#374550" stroke-width="10" fill="none"/><text x="0" y="325" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#0F0F0F">Canvas Carryall</text><text x="0" y="351" font-family="Arial,sans-serif" font-size="16" fill="#737373">R1,499</text></g>
+    <g transform="translate(320 0)"><rect width="285" height="280" rx="14" fill="#FFF1E8"/><circle cx="142" cy="140" r="85" fill="#F18954"/><circle cx="142" cy="140" r="48" fill="#FFF1E8"/><text x="0" y="325" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#0F0F0F">Daily Vessel</text><text x="0" y="351" font-family="Arial,sans-serif" font-size="16" fill="#737373">R649</text></g>
+    <g transform="translate(640 0)"><rect width="285" height="280" rx="14" fill="#F0EEFF"/><rect x="68" y="67" width="150" height="150" rx="28" fill="#6E67D1"/><path d="M105 145h76M143 107v76" stroke="white" stroke-width="12" stroke-linecap="round"/><text x="0" y="325" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#0F0F0F">Studio Notes</text><text x="0" y="351" font-family="Arial,sans-serif" font-size="16" fill="#737373">R399</text></g>
+    <g transform="translate(960 0)"><rect width="285" height="280" rx="14" fill="#FCEAF4"/><path d="M70 172h145l-32 38H100l-30-38Z" fill="#D84796"/><path d="m95 172 25-78h45l25 78" stroke="#D84796" stroke-width="18" fill="none"/><text x="0" y="325" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#0F0F0F">Desk Light</text><text x="0" y="351" font-family="Arial,sans-serif" font-size="16" fill="#737373">R899</text></g>
+  </g>
+</g>
+<text x="100" y="950" font-family="Arial,sans-serif" font-size="20" letter-spacing="4" fill="#737373">E-COMMERCE EXPERIENCE / CONCEPT</text>
 </svg>

@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
+import { Header } from "@/components/layout/Header";
+import { MayaAssistant } from "@/components/maya/MayaAssistant";
+import { CookieConsent } from "@/components/ui/CookieConsent";
+import { MotionProvider } from "@/components/motion/MotionProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -73,7 +77,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${geistSans.variable}`}>
-      <body className="min-h-screen flex flex-col">{children}</body>
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/icon-192.png" />
+      </head>
+      <body className="min-h-screen flex flex-col">
+        <MotionProvider>
+          <Header />
+          {children}
+          <MayaAssistant />
+          <CookieConsent />
+        </MotionProvider>
+      </body>
     </html>
   );
 }

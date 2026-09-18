@@ -3,8 +3,6 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import Link from "next/link";
-import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/Button";
 
@@ -22,7 +20,7 @@ const values = [
   {
     title: "Long-Term Thinking",
     description:
-      "We're not interested in quick wins that create problems later. We build systems and relationships designed to last.",
+      "We&apos;re not interested in quick wins that create problems later. We build systems and relationships designed to last.",
   },
   {
     title: "Human First",
@@ -70,7 +68,6 @@ const capabilities = [
 export default function AboutPage() {
   return (
     <>
-      <Header />
       <main className="pt-20">
         {/* Hero Section */}
         <section className="section-spacing container-padding">
@@ -84,7 +81,7 @@ export default function AboutPage() {
                 About My Grafix Media
               </p>
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight leading-tight mb-12 max-w-5xl">
-                We're a creative partner for ambitious businesses.
+                We&apos;re a creative partner for ambitious businesses.
               </h1>
             </motion.div>
           </div>
@@ -134,9 +131,9 @@ export default function AboutPage() {
                 </p>
 
                 <p>
-                  We're based in South Africa, but we work with businesses
-                  everywhere. That means world-class work, thoughtful execution,
-                  and the kind of partnership that helps you move forward.
+                  We work with ambitious businesses everywhere. That means
+                  world-class work, thoughtful execution, and the kind of
+                  partnership that helps you move forward.
                 </p>
               </motion.div>
             </div>
@@ -208,36 +205,21 @@ export default function AboutPage() {
                 transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
               >
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-tight mb-8">
-                  Built in South Africa.
+                  Global reach,
                   <br />
-                  Designed for everywhere.
+                  local expertise.
                 </h2>
                 <p className="text-lg opacity-80 leading-relaxed mb-8">
-                  We're proud to be based in South Africa, and we work with
-                  businesses around the world. Location doesn't limit capability—
-                  great work can come from anywhere.
+                  We work with businesses across the globe. Location doesn&apos;t
+                  limit capability—great work can come from anywhere, for anyone.
                 </p>
                 <p className="text-lg opacity-80 leading-relaxed">
-                  Whether you're in Johannesburg, New York, London, or anywhere
+                  Whether you&apos;re in New York, London, Tokyo, or anywhere
                   else, we bring the same level of quality, professionalism, and
                   partnership to every project.
                 </p>
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.2 }}
-                className="relative"
-              >
-                <div className="aspect-square rounded-2xl bg-background/10 backdrop-blur-sm flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="text-8xl md:text-9xl mb-4">🇿🇦</div>
-                    <p className="text-sm opacity-70">South Africa</p>
-                  </div>
-                </div>
-              </motion.div>
             </div>
           </div>
         </section>
@@ -253,11 +235,11 @@ export default function AboutPage() {
               className="border border-border rounded-3xl p-12 md:p-16 lg:p-20 text-center"
             >
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-tight mb-8 max-w-4xl mx-auto">
-                Let's work together.
+                Let&apos;s work together.
               </h2>
               <p className="text-lg md:text-xl text-muted leading-relaxed mb-12 max-w-2xl mx-auto">
-                Whether you're starting from scratch or looking to elevate what
-                you already have, we're ready to help.
+                Whether you&apos;re starting from scratch or looking to elevate what
+                you already have, we&apos;re ready to help.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button href="/contact" size="large">

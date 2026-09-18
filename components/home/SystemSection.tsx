@@ -1,8 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { Kicker } from "@/components/ui/Kicker";
+import { AmbientGrid } from "@/components/motion/AmbientGrid";
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
+import { SignalRail } from "@/components/motion/Signal";
 
 const systemSteps = [
   {
@@ -27,124 +28,78 @@ const systemSteps = [
   },
 ];
 
+/**
+ * LEVEL 2 — the ecosystem.
+ *
+ * The connector is the site's continuity motif: it draws itself and then
+ * carries a signal, so this reads as one system rather than four cards
+ * on a background.
+ */
 export function SystemSection() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
   return (
-    <section ref={ref} className="section-spacing container-padding bg-background">
-      <div className="max-w-[1600px] mx-auto">
+    <section className="section-spacing container-padding bg-background relative overflow-hidden">
+      <AmbientGrid className="opacity-70" duration={100} />
+
+      <div className="relative z-10 mx-auto max-w-[1600px]">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
-          className="mb-20 md:mb-32 text-center max-w-4xl mx-auto"
-        >
-          <p className="text-sm uppercase tracking-wider text-subtle font-medium mb-6">
-            The My Grafix System
-          </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-tight mb-8">
+        <Reveal className="mb-16 max-w-3xl md:mb-20">
+          <Kicker className="mb-5">The My Grafix System</Kicker>
+          <h2 className="display-lg mb-6 text-3xl md:text-4xl lg:text-5xl">
             Complete systems, not isolated assets.
           </h2>
-          <p className="text-lg md:text-xl text-muted leading-relaxed">
+          <p className="text-base leading-relaxed text-muted md:text-lg">
             We help businesses build the infrastructure around how they present
             themselves, operate, and grow—from first impression to intelligent
             operation.
           </p>
-        </motion.div>
+        </Reveal>
 
         {/* System Flow */}
         <div className="relative">
-          {/* Connection Lines - Desktop */}
-          <div className="hidden lg:block absolute top-0 left-0 right-0 h-full pointer-events-none">
-            <svg
-              className="w-full h-full"
-              viewBox="0 0 1200 400"
-              fill="none"
-              preserveAspectRatio="none"
-            >
-              <motion.path
-                d="M 150 200 Q 400 100, 450 200 T 750 200 T 1050 200"
-                stroke="rgb(229 229 229)"
-                strokeWidth="2"
-                fill="none"
-                initial={{ pathLength: 0 }}
-                animate={isInView ? { pathLength: 1 } : { pathLength: 0 }}
-                transition={{ duration: 2, ease: "easeInOut", delay: 0.5 }}
-              />
-            </svg>
-          </div>
+          {/* Connector — draws, then carries the signal */}
+          <SignalRail
+            className="absolute left-5 right-5 top-5 hidden lg:block"
+            flow={false}
+            flowDuration={7}
+            delay={0.35}
+            endAt={0.95}
+          />
 
-          {/* Steps Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 relative">
-            {systemSteps.map((step, index) => (
-              <motion.div
-                key={step.number}
-                initial={{ opacity: 0, y: 30 }}
-                animate={
-                  isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
-                }
-                transition={{
-                  duration: 0.8,
-                  ease: [0.33, 1, 0.68, 1],
-                  delay: index * 0.15,
-                }}
-                className="relative"
-              >
-                {/* Number Badge */}
-                <div className="w-16 h-16 rounded-full bg-foreground text-background flex items-center justify-center text-sm font-medium mb-6 relative z-10">
-                  {step.number}
+          <RevealGroup
+            stagger={0.09}
+            className="relative grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-8"
+          >
+            {systemSteps.map((step) => (
+              <RevealItem key={step.number} distance={14}>
+                <div className="relative flex items-center gap-3">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-[6px] bg-surface mono-label text-foreground hairline relative z-10">
+                    {step.number}
+                  </span>
+                  <span
+                    className="node-pulse h-1.5 w-1.5 rounded-full bg-accent-brand"
+                    style={{ animationDelay: `${Number(step.number) * 0.5}s` }}
+                    aria-hidden="true"
+                  />
                 </div>
 
-                {/* Content */}
-                <h3 className="text-2xl md:text-3xl font-medium tracking-tight mb-4">
-                  {step.title}
-                </h3>
-                <p className="text-[15px] text-muted leading-relaxed">
+                <h3 className="mb-3 mt-6 text-xl md:text-2xl">{step.title}</h3>
+                <p className="text-sm leading-relaxed text-muted">
                   {step.description}
                 </p>
-
-                {/* Arrow - Mobile */}
-                {index < systemSteps.length - 1 && (
-                  <div className="lg:hidden flex justify-center my-8">
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      className="text-border"
-                    >
-                      <path
-                        d="M12 5V19M12 19L5 12M12 19L19 12"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-                )}
-              </motion.div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </div>
 
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{
-            duration: 0.8,
-            ease: [0.33, 1, 0.68, 1],
-            delay: 0.8,
-          }}
-          className="mt-20 md:mt-32 text-center"
+        {/* Bottom line */}
+        <Reveal
+          className="mt-16 border-t border-border pt-8 md:mt-20"
+          delay={0.1}
         >
-          <p className="text-lg md:text-xl text-muted mb-8">
+          <p className="text-base text-muted md:text-lg">
             One partner. From first impression to intelligent operation.
           </p>
-        </motion.div>
+        </Reveal>
       </div>
     </section>
   );
