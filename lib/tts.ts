@@ -68,8 +68,9 @@ class OpenRouterFishAudioProvider implements TextToSpeechProvider {
     });
 
     if (!response.ok) {
+      const detail = await response.text().catch(() => "");
       throw new Error(
-        `TTS provider responded ${response.status}`
+        `TTS provider responded ${response.status}${detail ? `: ${detail.slice(0, 400)}` : ""}`
       );
     }
 

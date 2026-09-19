@@ -52,7 +52,8 @@ export async function POST(request: Request) {
         "Cache-Control": "no-store",
       },
     });
-  } catch {
+  } catch (error) {
+    console.error("[maya/speech]", error instanceof Error ? error.message : error);
     return NextResponse.json(
       { success: false, error: "Voice is temporarily unavailable." },
       { status: 502 }
