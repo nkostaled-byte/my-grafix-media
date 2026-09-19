@@ -59,9 +59,11 @@ class OpenRouterFishAudioProvider implements TextToSpeechProvider {
       body: JSON.stringify({
         model: this.model,
         input: text,
-        /* Fish Audio documents an empty voice as "model default". */
-        voice: this.voice,
         response_format: "mp3",
+        /* A voice is only sent when one is configured — OpenRouter's
+           gateway rejects empty strings, so omission is how "model
+           default" is expressed here. */
+        ...(this.voice ? { voice: this.voice } : {}),
       }),
       signal: options?.signal,
       cache: "no-store",
