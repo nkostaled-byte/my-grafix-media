@@ -49,7 +49,9 @@ export function Button({
   };
 
   const sizes = {
-    default: "h-10 px-4 text-sm rounded-[6px]",
+    /* Both sizes share the About-page CTA geometry: h-11 with generous
+       horizontal padding, so every button site-wide reads identically. */
+    default: "h-11 px-5 text-sm rounded-[6px]",
     large: "h-11 px-5 text-sm rounded-[6px]",
   };
 

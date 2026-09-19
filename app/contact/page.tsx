@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Footer } from "@/components/layout/Footer";
+import { Button } from "@/components/ui/Button";
 
 const projectTypes = [
   "Brand Identity",
@@ -324,13 +325,14 @@ export default function ContactPage() {
                   )}
 
                   {/* Submit Button */}
-                  <button
+                  <Button
                     type="submit"
+                    size="large"
+                    className="w-full"
                     disabled={status.type === "loading"}
-                    className="w-full h-14 px-8 bg-foreground text-background rounded-full font-medium hover:bg-accent-muted transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {status.type === "loading" ? "Sending..." : "Send Message"}
-                  </button>
+                  </Button>
 
                   <p className="text-sm text-muted text-center">
                     We&apos;ll get back to you within 24 hours

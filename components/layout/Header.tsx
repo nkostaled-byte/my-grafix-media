@@ -89,7 +89,7 @@ export function Header() {
                 className="h-8 w-8"
                 priority
               />
-              <span className="hidden text-[15px] font-semibold tracking-[-0.02em] sm:inline">
+              <span className="text-[15px] font-semibold tracking-[-0.02em]">
                 My Grafix Media
               </span>
             </Link>
@@ -179,15 +179,15 @@ export function Header() {
               className="fixed inset-0 z-40 bg-foreground/20 backdrop-blur-sm md:hidden"
             />
 
-            {/* Menu Panel */}
+            {/* Menu Panel — floating card anchored below the header bar */}
             <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ duration: 0.25, ease: EASE.out }}
-              className="fixed bottom-0 right-0 top-[4.5rem] z-40 w-full max-w-sm border-l border-border bg-background md:hidden"
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.22, ease: EASE.out }}
+              className="fixed left-4 right-4 top-[4.75rem] z-40 mx-auto max-w-[1060px] overflow-hidden rounded-[24px] border border-border bg-background shadow-[0_1px_2px_rgba(0,0,0,0.04),0_24px_48px_-24px_rgba(0,0,0,0.2)] md:hidden"
             >
-              <nav className="flex flex-col gap-1 p-6">
+              <nav className="px-6 pb-6 pt-2">
                 {navItems.map((item, index) => {
                   const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
                   return (
@@ -195,17 +195,15 @@ export function Header() {
                       key={item.href}
                       initial={{ opacity: 0, x: 12 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.06 }}
+                      transition={{ delay: index * 0.05 }}
                     >
                       <Link
                         href={item.href}
                         onClick={() => setIsMobileMenuOpen(false)}
                         aria-current={isActive ? "page" : undefined}
                         className={cn(
-                          "flex items-center justify-between rounded-[6px] px-3 py-3 text-base transition-colors",
-                          isActive
-                            ? "bg-surface-raised text-foreground hairline"
-                            : "text-muted hover:text-foreground"
+                          "flex items-center justify-between border-b border-border py-4 text-lg font-medium transition-colors",
+                          isActive ? "text-foreground" : "text-muted hover:text-foreground"
                         )}
                       >
                         {item.label}
@@ -220,22 +218,22 @@ export function Header() {
                 <motion.div
                   initial={{ opacity: 0, x: 12 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: navItems.length * 0.06 }}
-                  className="mt-4 border-t border-border pt-4"
+                  transition={{ delay: navItems.length * 0.05 }}
+                  className="border-b border-border py-2"
                 >
                   <ThemeToggle theme={theme} onToggle={toggleTheme} mobile />
                 </motion.div>
 
                 <motion.div
-                  initial={{ opacity: 0, x: 12 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: (navItems.length + 1) * 0.06 }}
-                  className="mt-3"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: (navItems.length + 1) * 0.05 }}
+                  className="pt-6"
                 >
                   <Button
                     href="/contact"
                     size="large"
-                    className="w-full !rounded-full"
+                    className="w-full !rounded-[12px]"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Start a Project
