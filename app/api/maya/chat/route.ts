@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 
+// CAUTION: static type-checking here needs a Node `globalThis` shim —
+// see AGENTS.md note in this same section. Do not "fix" in ways that ship
+// untested production code.
 export const runtime = "nodejs";
 
 /**
@@ -8,7 +11,7 @@ export const runtime = "nodejs";
  * this same agent; it is only another input/output interface.
  */
 
-const OPENROUTER_CHAT_URL = "https://openrouter.ai/api/v1/chat/completions";
+export const OPENROUTER_CHAT_URL = "https://openrouter.ai/api/v1/chat/completions";
 
 const MAX_MESSAGE_LENGTH = 1200;
 const MAX_HISTORY_LENGTH = 12;
