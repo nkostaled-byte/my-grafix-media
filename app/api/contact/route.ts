@@ -6,7 +6,9 @@ const MAX_FIELD = 2000;
 
 function apiEndpoint() {
   const base = process.env.MAYA_API_URL?.replace(/\/$/, "");
-  return base || null;
+  /* Conventions match the other intake routes: the env var is the
+     service root, and each route names its own resource. */
+  return base ? `${base}/api/contact` : null;
 }
 
 function clean(value: unknown, max = MAX_FIELD) {
