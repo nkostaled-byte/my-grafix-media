@@ -2,7 +2,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/home/Hero";
 import { Introduction } from "@/components/home/Introduction";
 import { Pillars } from "@/components/home/Pillars";
-import { BuiltBy } from "@/components/home/BuiltBy";
+import { SelectedWork } from "@/components/home/SelectedWork";
 import { SystemSection } from "@/components/home/SystemSection";
 import { Services } from "@/components/home/Services";
 import { MeetMaya } from "@/components/home/MeetMaya";
@@ -47,7 +47,7 @@ export default function Home() {
         <Hero />
         <Introduction />
         <Pillars />
-        <BuiltBy />
+        <SelectedWork />
         <SystemSection />
         <Services />
         <MeetMaya />
