@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Button } from "@/components/ui/Button";
 import { Footer } from "@/components/layout/Footer";
 import { ThemeProjectImage } from "@/components/ui/ThemeProjectImage";
 
@@ -149,7 +150,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <div className="mx-auto max-w-[1200px] rounded-3xl border border-border p-10 text-center md:p-16">
             <h2 className="mb-6 text-4xl font-medium tracking-tight md:text-5xl">Have a project with a similar challenge?</h2>
             <p className="mx-auto mb-9 max-w-2xl text-lg leading-relaxed text-muted">Tell us what you are building and we can explore the right combination of design, digital, and intelligence.</p>
-            <Link href="/contact" className="inline-flex h-14 items-center justify-center rounded-full bg-foreground px-8 font-medium text-background transition-opacity hover:opacity-75">Start a Project</Link>
+            <Button href="/contact" size="large">Start a Project</Button>
           </div>
         </section>
       </main>
