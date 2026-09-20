@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Button } from "@/components/ui/Button";
 
 const CONSENT_KEY = "mygrafix-cookie-consent";
 
@@ -45,20 +46,12 @@ export function CookieConsent() {
           </Link>
         </div>
         <div className="flex shrink-0 gap-2">
-          <button
-            type="button"
-            onClick={() => saveConsent("declined")}
-            className="rounded-[6px] px-3.5 py-2 text-sm font-medium text-muted hairline transition-colors duration-200 hover:text-foreground hover:hairline-strong"
-          >
+          <Button type="button" variant="secondary" onClick={() => saveConsent("declined")}>
             Decline
-          </button>
-          <button
-            type="button"
-            onClick={() => saveConsent("accepted")}
-            className="rounded-[6px] bg-foreground px-3.5 py-2 text-sm font-medium text-background transition-opacity duration-200 hover:opacity-85"
-          >
+          </Button>
+          <Button type="button" variant="primary" onClick={() => saveConsent("accepted")}>
             Accept
-          </button>
+          </Button>
         </div>
       </div>
     </aside>

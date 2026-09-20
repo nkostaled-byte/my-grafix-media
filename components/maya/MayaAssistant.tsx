@@ -126,7 +126,7 @@ export function MayaAssistant() {
         onClick={() => setOpen(true)}
         aria-label="Open Maya assistant"
         aria-expanded={open}
-        className="fixed bottom-6 right-6 z-40 inline-flex items-center gap-2.5 rounded-[8px] bg-background/90 px-4 py-2.5 text-sm font-medium text-foreground hairline backdrop-blur-xl transition-colors duration-200 hover:bg-surface-raised hover:hairline-strong"
+        className="fixed bottom-6 right-6 z-40 inline-flex h-11 items-center gap-2.5 rounded-[6px] bg-background/90 px-5 text-sm font-medium text-foreground hairline backdrop-blur-xl transition-all duration-200 ease-out hover:bg-surface-raised hover:hairline-strong active:scale-[0.985] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-brand"
       >
         <MayaMark compact />
         <span>Ask Maya</span>

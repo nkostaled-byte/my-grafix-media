@@ -136,7 +136,7 @@ export function Header() {
               <div className="mx-2 h-5 w-px bg-border" aria-hidden="true" />
               <ThemeToggle theme={theme} onToggle={toggleTheme} />
               <div className="ml-2">
-                <Button href="/contact" size="default" className="!rounded-full">
+                <Button href="/contact" size="default">
                   Start a Project
                 </Button>
               </div>
@@ -233,7 +233,7 @@ export function Header() {
                   <Button
                     href="/contact"
                     size="large"
-                    className="w-full !rounded-[12px]"
+                    className="w-full"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Start a Project

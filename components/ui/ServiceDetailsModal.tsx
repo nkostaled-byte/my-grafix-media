@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Kicker } from "@/components/ui/Kicker";
+import { Button } from "@/components/ui/Button";
 
 type ServiceDetails = {
   name: string;
@@ -73,13 +74,13 @@ export function ServiceDetailsModal({
               <p className="text-base leading-relaxed text-muted md:text-lg">
                 {service.description}
               </p>
-              <button
+              <Button
                 type="button"
                 onClick={onClose}
-                className="mt-7 rounded-full bg-foreground px-4 py-2.5 text-sm font-medium text-background transition-opacity duration-200 hover:opacity-85"
+                className="mt-7"
               >
                 Continue exploring
-              </button>
+              </Button>
             </div>
           </motion.div>
         </>
