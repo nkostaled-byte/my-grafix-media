@@ -156,8 +156,8 @@ export function Hero() {
             partner instead of juggling three agencies.
           </motion.p>
 
-          {/* CTAs — subtly magnetic on pointer devices */}
-          <motion.div variants={item} className="flex flex-col gap-3 sm:flex-row">
+          {/* CTA — subtly magnetic on pointer devices */}
+          <motion.div variants={item} className="flex">
             <Magnetic strength={4} className="self-start sm:inline-flex">
               <Button href="/contact" size="large" className="group w-[min(260px,100%)] sm:w-auto">
                 Start a Project
@@ -169,15 +169,6 @@ export function Hero() {
                 </span>
               </Button>
             </Magnetic>
-            <Button href="/work" variant="secondary" size="large" className="group w-[min(260px,100%)] self-start sm:w-auto">
-              Explore Our Work
-              <span
-                aria-hidden="true"
-                className="ml-0.5 inline-block transition-transform duration-200 ease-out group-hover:translate-x-0.5"
-              >
-                →
-              </span>
-            </Button>
           </motion.div>
         </motion.div>
       </div>
