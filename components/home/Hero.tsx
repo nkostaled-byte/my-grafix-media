@@ -169,8 +169,14 @@ export function Hero() {
                 </span>
               </Button>
             </Magnetic>
-            <Button href="/work" variant="secondary" size="large">
+            <Button href="/work" variant="secondary" size="large" className="group">
               Explore Our Work
+              <span
+                aria-hidden="true"
+                className="ml-0.5 inline-block transition-transform duration-200 ease-out group-hover:translate-x-0.5"
+              >
+                →
+              </span>
             </Button>
           </motion.div>
         </motion.div>

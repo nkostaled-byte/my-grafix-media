@@ -238,8 +238,14 @@ export default function ServicesPage() {
                 <Button href="/contact" size="large">
                   Start a Project
                 </Button>
-                <Button href="/work" variant="secondary" size="large">
+                <Button href="/work" variant="secondary" size="large" className="group">
                   View Our Work
+                  <span
+                    aria-hidden="true"
+                    className="ml-0.5 inline-block transition-transform duration-200 ease-out group-hover:translate-x-0.5"
+                  >
+                    →
+                  </span>
                 </Button>
               </div>
             </motion.div>

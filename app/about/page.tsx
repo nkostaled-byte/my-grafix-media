@@ -245,8 +245,14 @@ export default function AboutPage() {
                 <Button href="/contact" size="large">
                   Start a Project
                 </Button>
-                <Button href="/services" variant="secondary" size="large">
+                <Button href="/services" variant="secondary" size="large" className="group">
                   View Services
+                  <span
+                    aria-hidden="true"
+                    className="ml-0.5 inline-block transition-transform duration-200 ease-out group-hover:translate-x-0.5"
+                  >
+                    →
+                  </span>
                 </Button>
               </div>
             </motion.div>
