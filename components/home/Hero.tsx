@@ -158,8 +158,8 @@ export function Hero() {
 
           {/* CTAs — subtly magnetic on pointer devices */}
           <motion.div variants={item} className="flex flex-col gap-3 sm:flex-row">
-            <Magnetic strength={4} className="inline-flex">
-              <Button href="/contact" size="large" className="group">
+            <Magnetic strength={4} className="w-full sm:w-auto sm:inline-flex">
+              <Button href="/contact" size="large" className="group w-full sm:w-auto">
                 Start a Project
                 <span
                   aria-hidden="true"

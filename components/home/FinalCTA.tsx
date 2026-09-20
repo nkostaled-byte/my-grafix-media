@@ -40,8 +40,8 @@ export function FinalCTA() {
               </p>
 
               <div className="flex flex-col justify-center gap-3 sm:flex-row">
-                <Magnetic strength={4} className="inline-flex justify-center">
-                  <Button href="/contact" size="large" className="group">
+                <Magnetic strength={4} className="inline-flex w-full justify-center sm:w-auto">
+                  <Button href="/contact" size="large" className="group w-full sm:w-auto">
                     Start a Project
                     <span
                       aria-hidden="true"
