@@ -41,7 +41,7 @@ export function FinalCTA() {
 
               <div className="flex flex-col justify-center gap-3 sm:flex-row">
                 <Magnetic strength={4} className="inline-flex self-start sm:w-auto">
-                  <Button href="/contact" size="large" className="group w-full max-w-[260px] sm:w-auto">
+                  <Button href="/contact" size="large" className="group w-[min(260px,100%)] sm:w-auto">
                     Start a Project
                     <span
                       aria-hidden="true"
@@ -51,7 +51,7 @@ export function FinalCTA() {
                     </span>
                   </Button>
                 </Magnetic>
-                <Button href="/work" variant="secondary" size="large" className="group w-full max-w-[260px] self-start sm:w-auto">
+                <Button href="/work" variant="secondary" size="large" className="group w-[min(260px,100%)] self-start sm:w-auto">
                   View Our Work
                   <span
                     aria-hidden="true"
