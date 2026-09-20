@@ -190,9 +190,13 @@ export function MayaAssistant() {
                 <div className="space-y-3">
                   {messages.map((message, index) => (
                     <div key={`${message.role}-${index}`} className={message.role === "user" ? "flex justify-end" : "flex justify-start"}>
-                      <p className={message.role === "user" ? "max-w-[86%] rounded-[10px] rounded-br-[3px] bg-foreground px-3.5 py-2.5 text-sm leading-relaxed text-background" : "max-w-[92%] rounded-[10px] rounded-bl-[3px] bg-surface-raised px-3.5 py-2.5 text-sm leading-relaxed text-foreground hairline"}>
-                        {message.content}
-                      </p>
+                      {message.role === "user" ? (
+                        <p className="max-w-[86%] rounded-[10px] rounded-br-[3px] bg-foreground px-3.5 py-2.5 text-sm leading-relaxed text-background">
+                          {message.content}
+                        </p>
+                      ) : (
+                        <MayaReply content={message.content} onNavigate={() => setOpen(false)} />
+                      )}
                     </div>
                   ))}
 
@@ -274,6 +278,42 @@ export function MayaAssistant() {
         )}
       </AnimatePresence>
     </>
+  );
+}
+
+/**
+ * Maya never spits a raw URL into the conversation: any link she
+ * returns is rendered as a real button that navigates there.
+ */
+const URL_SPLIT = /(https?:\/\/[^\s]+)/g;
+
+function MayaReply({ content, onNavigate }: { content: string; onNavigate: () => void }) {
+  const parts = content.split(URL_SPLIT).filter(Boolean);
+  return (
+    <p className="max-w-[92%] rounded-[10px] rounded-bl-[3px] bg-surface-raised px-3.5 py-2.5 text-sm leading-relaxed text-foreground hairline">
+      {parts.map((part, index) => {
+        const isLink = /^https?:\/\//.test(part);
+        if (!isLink) return <span key={index}>{part}</span>;
+        let path: string;
+        try {
+          path = new URL(part).pathname.replace(/\/$/, "") || "Home";
+        } catch {
+          path = "link";
+        }
+        const label = `Open ${path.charAt(0).toUpperCase()}${path.slice(1)} page`;
+        return (
+          <Link
+            key={index}
+            href={part}
+            onClick={onNavigate}
+            className="mono-label mt-2 inline-flex items-center gap-1.5 rounded-[6px] bg-foreground px-2.5 py-1 text-[11px] tracking-wider uppercase text-background transition-opacity duration-200 hover:opacity-85"
+          >
+            {label}
+            <span aria-hidden="true">→</span>
+          </Link>
+        );
+      })}
+    </p>
   );
 }
 

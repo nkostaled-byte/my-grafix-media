@@ -136,7 +136,7 @@ export function Header() {
               <div className="mx-2 h-5 w-px bg-border" aria-hidden="true" />
               <ThemeToggle theme={theme} onToggle={toggleTheme} />
               <div className="ml-2">
-                <Button href="/contact" size="default">
+                <Button href="/contact" size="default" className="!rounded-full">
                   Start a Project
                 </Button>
               </div>

@@ -135,9 +135,11 @@ export default function WorkPage() {
                 Tell us what you are building and we&apos;ll help you find the right
                 combination of design, digital and intelligence.
               </p>
-              <Button href="/contact" variant="inverse" size="large">
-                Start a Project
-              </Button>
+              <div className="flex justify-center">
+                <Button href="/contact" variant="inverse" size="large">
+                  Start a Project
+                </Button>
+              </div>
             </Reveal>
           </div>
         </section>

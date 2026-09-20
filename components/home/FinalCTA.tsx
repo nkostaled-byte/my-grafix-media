@@ -38,7 +38,7 @@ export function FinalCTA() {
                 Tell us what you're building. We'll handle the design, the website, the automation, or all three.
               </p>
 
-              <div className="flex flex-col justify-center gap-3 sm:flex-row">
+              <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <Button href="/contact" size="large" className="group w-[min(260px,100%)] sm:w-auto">
                   Start a Project
                   <span
@@ -48,7 +48,7 @@ export function FinalCTA() {
                     →
                   </span>
                 </Button>
-                <Button href="/work" variant="secondary" size="large" className="group w-[min(260px,100%)] self-start sm:w-auto">
+                <Button href="/work" variant="secondary" size="large" className="group w-[min(260px,100%)] sm:w-auto">
                   View Our Work
                   <span
                     aria-hidden="true"
