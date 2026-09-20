@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/Button";
 import { Kicker } from "@/components/ui/Kicker";
 import { AmbientGrid } from "@/components/motion/AmbientGrid";
-import { Magnetic } from "@/components/motion/Pointer";
 import { Reveal } from "@/components/motion/Reveal";
 import { SignalRail } from "@/components/motion/Signal";
 
@@ -40,17 +39,15 @@ export function FinalCTA() {
               </p>
 
               <div className="flex flex-col justify-center gap-3 sm:flex-row">
-                <Magnetic strength={4} className="inline-flex self-start sm:w-auto">
-                  <Button href="/contact" size="large" className="group w-[min(260px,100%)] sm:w-auto">
-                    Start a Project
-                    <span
-                      aria-hidden="true"
-                      className="ml-0.5 inline-block transition-transform duration-200 ease-out group-hover:translate-x-0.5"
-                    >
-                      →
-                    </span>
-                  </Button>
-                </Magnetic>
+                <Button href="/contact" size="large" className="group w-[min(260px,100%)] sm:w-auto">
+                  Start a Project
+                  <span
+                    aria-hidden="true"
+                    className="ml-0.5 inline-block transition-transform duration-200 ease-out group-hover:translate-x-0.5"
+                  >
+                    →
+                  </span>
+                </Button>
                 <Button href="/work" variant="secondary" size="large" className="group w-[min(260px,100%)] self-start sm:w-auto">
                   View Our Work
                   <span

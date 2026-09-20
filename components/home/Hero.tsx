@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
-import { Magnetic, PointerShift } from "@/components/motion/Pointer";
+import { PointerShift } from "@/components/motion/Pointer";
 import { AmbientGrid } from "@/components/motion/AmbientGrid";
 import { DURATION, EASE } from "@/lib/motion";
 
@@ -156,19 +156,17 @@ export function Hero() {
             partner instead of juggling three agencies.
           </motion.p>
 
-          {/* CTA — subtly magnetic on pointer devices */}
+          {/* CTA — magnetic cursor tracking is built into Button */}
           <motion.div variants={item} className="flex">
-            <Magnetic strength={4} className="self-start sm:inline-flex">
-              <Button href="/contact" size="large" className="group w-[min(260px,100%)] sm:w-auto">
-                Start a Project
-                <span
-                  aria-hidden="true"
-                  className="ml-0.5 inline-block transition-transform duration-200 ease-out group-hover:translate-x-0.5"
-                >
-                  →
-                </span>
-              </Button>
-            </Magnetic>
+            <Button href="/contact" size="large" className="group w-[min(260px,100%)] sm:w-auto">
+              Start a Project
+              <span
+                aria-hidden="true"
+                className="ml-0.5 inline-block transition-transform duration-200 ease-out group-hover:translate-x-0.5"
+              >
+                →
+              </span>
+            </Button>
           </motion.div>
         </motion.div>
       </div>

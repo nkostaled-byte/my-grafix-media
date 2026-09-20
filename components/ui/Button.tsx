@@ -1,6 +1,10 @@
-import { AnchorHTMLAttributes, ButtonHTMLAttributes } from "react";
-import { cn } from "@/lib/utils";
+"use client";
+
+import { useRef, type AnchorHTMLAttributes, type ButtonHTMLAttributes, type PointerEvent } from "react";
+import { motion, useMotionValue, useReducedMotion, useSpring, type HTMLMotionProps } from "framer-motion";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { SPRING } from "@/lib/motion";
 
 type ButtonBaseProps = {
   variant?: "primary" | "secondary" | "ghost" | "inverse";
@@ -21,6 +25,8 @@ type ButtonAsLink = ButtonBaseProps &
 
 type ButtonProps = ButtonAsButton | ButtonAsLink;
 
+const MotionLink = motion.create(Link);
+
 export function Button({
   variant = "primary",
   size = "default",
@@ -29,6 +35,13 @@ export function Button({
   href,
   ...props
 }: ButtonProps) {
+  const reduce = useReducedMotion();
+  const ref = useRef<HTMLElement | null>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const sx = useSpring(x, SPRING.pointer);
+  const sy = useSpring(y, SPRING.pointer);
+
   /* Engineered posture: compact, 6px radius, hairline structure.
      Transitions are short and mechanical — no ease-in-out theatre.
      active:scale gives a single frame of physical acknowledgement on
@@ -55,19 +68,53 @@ export function Button({
     large: "h-11 px-5 text-sm rounded-[6px]",
   };
 
+  /* Cursor tracking — the same magnetic response every button on the
+     site shares. Pointer-only: touch and reduced-motion stay still. */
+  function handleMove(event: PointerEvent<HTMLElement>) {
+    if (reduce || event.pointerType !== "mouse" || !ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const dx = (event.clientX - (rect.left + rect.width / 2)) / (rect.width / 2 || 1);
+    const dy = (event.clientY - (rect.top + rect.height / 2)) / (rect.height / 2 || 1);
+    x.set(Math.max(-1, Math.min(1, dx)) * 4);
+    y.set(Math.max(-1, Math.min(1, dy)) * 4);
+  }
+
+  function handleLeave() {
+    x.set(0);
+    y.set(0);
+  }
+
+  const magnetic = {
+    ref: (node: HTMLElement | null) => {
+      ref.current = node;
+    },
+    onPointerMove: handleMove,
+    onPointerLeave: handleLeave,
+    style: { x: sx, y: sy },
+  };
+
   const classes = cn(baseStyles, variants[variant], sizes[size], className);
 
   if (href) {
     return (
-      <Link href={href} className={classes} {...(props as AnchorHTMLAttributes<HTMLAnchorElement>)}>
+      <MotionLink
+        href={href}
+        className={classes}
+        {...magnetic}
+        {...(props as unknown as HTMLMotionProps<"a">)}
+      >
         {children}
-      </Link>
+      </MotionLink>
     );
   }
 
   return (
-    <button className={classes} {...(props as ButtonHTMLAttributes<HTMLButtonElement>)}>
+    <motion.button
+      className={classes}
+      {...magnetic}
+      {...(props as unknown as HTMLMotionProps<"button">)}
+    >
       {children}
-    </button>
+    </motion.button>
   );
 }
