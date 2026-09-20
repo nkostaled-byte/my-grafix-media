@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Our Work",
+  title: "Built by My Grafix",
   description:
-    "Explore My Grafix Media's portfolio of branding, web development, and AI automation projects. See how we help ambitious businesses stand out and work smarter.",
+    "What My Grafix builds itself: this website, the Business OS dashboard, Maya the AI concierge and the Living System automation model. Design, digital and intelligence, proven in the wild.",
+  alternates: { canonical: "/work" },
 };
 
 export default function WorkLayout({

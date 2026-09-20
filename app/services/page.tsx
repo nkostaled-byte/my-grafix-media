@@ -124,6 +124,26 @@ const serviceCategories = [
   },
 ];
 
+const problems = [
+  {
+    heading: "Need a stronger digital presence?",
+    matches: ["Brand identity", "Website", "Digital design"],
+    anchor: "design",
+  },
+  {
+    heading: "Need to sell online?",
+    matches: ["E-commerce", "Products and orders", "Inventory"],
+  },
+  {
+    heading: "Too much repetitive work?",
+    matches: ["AI agents", "Automation", "Integrations"],
+  },
+  {
+    heading: "Need your systems connected?",
+    matches: ["Dashboards", "APIs", "Business systems"],
+  },
+];
+
 export default function ServicesPage() {
   return (
     <>
@@ -148,6 +168,42 @@ export default function ServicesPage() {
                 multiple agencies.
               </p>
             </motion.div>
+          </div>
+        </section>
+
+        {/* What problem are you solving? */}
+        <section className="container-padding pb-10">
+          <div className="max-w-[1600px] mx-auto">
+            <p className="kicker mb-6">Start with the problem</p>
+            <div className="border-t border-border">
+              {problems.map((problem) => (
+                <div
+                  key={problem.heading}
+                  className="group grid grid-cols-1 items-baseline gap-3 border-b border-border py-7 md:grid-cols-12 md:gap-10"
+                >
+                  <h2 className="text-xl font-medium tracking-tight md:col-span-5 md:text-2xl">
+                    {problem.heading}
+                  </h2>
+                  <ul className="flex flex-wrap gap-2 md:col-span-5" aria-label={problem.heading}>
+                    {problem.matches.map((match) => (
+                      <li
+                        key={match}
+                        className="rounded-[6px] bg-surface px-2.5 py-1.5 text-xs text-foreground hairline"
+                      >
+                        {match}
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href={`#${problem.anchor ?? "digital"}`}
+                    className="mono-label inline-flex items-center gap-2 text-muted transition-colors duration-200 hover:text-accent-brand md:col-span-2 md:justify-self-end"
+                  >
+                    See where
+                    <span aria-hidden="true">→</span>
+                  </a>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 

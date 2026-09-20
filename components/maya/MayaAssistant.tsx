@@ -57,6 +57,13 @@ export function MayaAssistant() {
     if (open) inputRef.current?.focus();
   }, [open]);
 
+  /* Sections can open the existing Maya rather than duplicating her. */
+  useEffect(() => {
+    const openFromSection = () => setOpen(true);
+    window.addEventListener("maya:open", openFromSection);
+    return () => window.removeEventListener("maya:open", openFromSection);
+  }, []);
+
   useEffect(() => {
     if (!open) return;
     const onKeyDown = (event: KeyboardEvent) => {

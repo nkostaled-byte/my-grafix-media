@@ -26,10 +26,10 @@ export const metadata: Metadata = {
     "branding",
     "AI automation",
     "digital agency",
-    "South Africa",
     "web design",
     "e-commerce",
     "AI agents",
+    "business systems",
   ],
   authors: [{ name: "My Grafix Media" }],
   creator: "My Grafix Media",
@@ -68,6 +68,7 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  alternates: { canonical: "/" },
 };
 
 export default function RootLayout({

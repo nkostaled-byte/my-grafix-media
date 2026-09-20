@@ -5,35 +5,43 @@ import { AmbientGrid } from "@/components/motion/AmbientGrid";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/Reveal";
 import { SignalRail } from "@/components/motion/Signal";
 
-const systemSteps = [
+const processSteps = [
   {
     number: "01",
-    title: "Brand",
-    description: "Create a visual identity that makes your business unmistakable.",
+    title: "Discover",
+    description: "We learn how your business presents itself and operates today.",
   },
   {
     number: "02",
-    title: "Website",
-    description: "Build digital experiences that convert visitors into customers.",
+    title: "Design",
+    description: "We shape the brand and experience customers respond to.",
   },
   {
     number: "03",
-    title: "Intelligence",
-    description: "Automate workflows so you can focus on what matters.",
+    title: "Build",
+    description: "We build the website, product or platform that runs on it.",
   },
   {
     number: "04",
-    title: "Growth",
-    description: "Scale confidently with systems built to grow with you.",
+    title: "Connect",
+    description: "We connect your tools and systems through APIs and shared data.",
+  },
+  {
+    number: "05",
+    title: "Automate",
+    description: "We automate the routine so it handles itself, with intelligence added where it pays off.",
+  },
+  {
+    number: "06",
+    title: "Evolve",
+    description: "The system improves with insights from running your business.",
   },
 ];
 
 /**
- * LEVEL 2 — the ecosystem.
- *
- * The connector is the site's continuity motif: it draws itself and then
- * carries a signal, so this reads as one system rather than four cards
- * on a background.
+ * The process. Uses the same connector motif as the rest of the site:
+ * the rail draws itself and then carries a signal, so six steps read as
+ * one continuous system rather than six cards.
  */
 export function SystemSection() {
   return (
@@ -43,18 +51,17 @@ export function SystemSection() {
       <div className="relative z-10 mx-auto max-w-[1600px]">
         {/* Section Header */}
         <Reveal className="mb-16 max-w-3xl md:mb-20">
-          <Kicker className="mb-5">The My Grafix System</Kicker>
+          <Kicker className="mb-5">The My Grafix Process</Kicker>
           <h2 className="display-lg mb-6 text-3xl md:text-4xl lg:text-5xl">
-            Complete systems, not isolated assets.
+            From idea to intelligent operation.
           </h2>
           <p className="text-base leading-relaxed text-muted md:text-lg">
-            We help businesses build the infrastructure around how they present
-            themselves, operate, and grow—from first impression to intelligent
-            operation.
+            One team, one connected path — instead of handing design, build,
+            and automation to three different vendors.
           </p>
         </Reveal>
 
-        {/* System Flow */}
+        {/* Process Flow */}
         <div className="relative">
           {/* Connector — draws, then carries the signal */}
           <SignalRail
@@ -66,10 +73,10 @@ export function SystemSection() {
           />
 
           <RevealGroup
-            stagger={0.09}
-            className="relative grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-8"
+            stagger={0.08}
+            className="relative grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-6 lg:gap-6"
           >
-            {systemSteps.map((step) => (
+            {processSteps.map((step) => (
               <RevealItem key={step.number} distance={14}>
                 <div className="relative flex items-center gap-3">
                   <span className="flex h-10 w-10 items-center justify-center rounded-[6px] bg-surface mono-label text-foreground hairline relative z-10">
@@ -77,7 +84,7 @@ export function SystemSection() {
                   </span>
                   <span
                     className="node-pulse h-1.5 w-1.5 rounded-full bg-accent-brand"
-                    style={{ animationDelay: `${Number(step.number) * 0.5}s` }}
+                    style={{ animationDelay: `${Number(step.number) * 0.4}s` }}
                     aria-hidden="true"
                   />
                 </div>

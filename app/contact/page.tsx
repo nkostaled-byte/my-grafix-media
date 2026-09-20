@@ -219,7 +219,7 @@ export default function ContactPage() {
                       htmlFor="projectType"
                       className="block text-sm font-medium mb-2"
                     >
-                      What do you need? *
+                      What are you trying to achieve? *
                     </label>
                     <select
                       id="projectType"
@@ -229,7 +229,7 @@ export default function ContactPage() {
                       onChange={handleChange}
                       className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-foreground focus:border-transparent transition-all bg-background"
                     >
-                      <option value="">Select a project type</option>
+                      <option value="">Select what fits best</option>
                       {projectTypes.map((type) => (
                         <option key={type} value={type}>
                           {type}
@@ -338,6 +338,56 @@ export default function ContactPage() {
                     We&apos;ll get back to you within 24 hours
                   </p>
                 </form>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* What Happens Next */}
+        <section className="section-spacing container-padding bg-border/20">
+          <div className="max-w-[1600px] mx-auto">
+            <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-20">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
+                className="lg:col-span-4"
+              >
+                <h2 className="text-2xl md:text-3xl font-medium tracking-tight mb-6">
+                  What happens next
+                </h2>
+                <p className="text-muted leading-relaxed">
+                  No mystery, no runaround. Four steps from your enquiry to
+                  work in progress.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1], delay: 0.1 }}
+                className="lg:col-span-8"
+              >
+                <div className="border-t border-border">
+                  {[
+                    "We review your enquiry.",
+                    "We clarify goals, scope and requirements.",
+                    "We propose the right direction and provide a quotation.",
+                    "Once approved, we build.",
+                  ].map((step, index) => (
+                    <div
+                      key={step}
+                      className="grid grid-cols-[auto,1fr] items-baseline gap-6 border-b border-border py-6 last:border-b-0"
+                    >
+                      <span className="mono-label text-subtle">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <p className="text-lg font-medium">{step}</p>
+                    </div>
+                  ))}
+                </div>
               </motion.div>
             </div>
           </div>

@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "My Grafix Media is a South African creative agency combining design, digital development, and AI automation. Learn about our approach and philosophy.",
+    "My Grafix Media is a complete creative technology partner: design, digital development and AI automation under one roof. Learn about our approach and philosophy.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutLayout({

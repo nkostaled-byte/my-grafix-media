@@ -20,7 +20,7 @@ const values = [
   {
     title: "Long-Term Thinking",
     description:
-      "We&apos;re not interested in quick wins that create problems later. We build systems and relationships designed to last.",
+      "We’re not interested in quick wins that create problems later. We build systems and relationships designed to last.",
   },
   {
     title: "Human First",
@@ -124,16 +124,10 @@ export default function AboutPage() {
                 </p>
 
                 <p>
-                  We work with businesses that are ready to stand out, operate
-                  smarter, and grow confidently. Whether you need a complete brand
-                  system, a high-performance website, or AI agents that automate
-                  your workflows—we have the expertise to make it happen.
-                </p>
-
-                <p>
-                  We work with ambitious businesses everywhere. That means
-                  world-class work, thoughtful execution, and the kind of
-                  partnership that helps you move forward.
+                  We work best with ambitious businesses that are ready to
+                  stand out, operate smarter, and grow confidently: design that
+                  earns attention, digital that works, and intelligence that
+                  removes the manual work in between.
                 </p>
               </motion.div>
             </div>
@@ -194,7 +188,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Location Section */}
+        {/* How We Work Together */}
         <section className="section-spacing container-padding bg-foreground text-background">
           <div className="max-w-[1600px] mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -205,18 +199,16 @@ export default function AboutPage() {
                 transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
               >
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight leading-tight mb-8">
-                  Global reach,
-                  <br />
-                  local expertise.
+                  The partner we aim to be.
                 </h2>
                 <p className="text-lg opacity-80 leading-relaxed mb-8">
-                  We work with businesses across the globe. Location doesn&apos;t
-                  limit capability—great work can come from anywhere, for anyone.
+                  The kind you can hand a problem to — brand, website, systems —
+                  and trust that the pieces will arrive already connected.
                 </p>
                 <p className="text-lg opacity-80 leading-relaxed">
-                  Whether you&apos;re in New York, London, Tokyo, or anywhere
-                  else, we bring the same level of quality, professionalism, and
-                  partnership to every project.
+                  We take ownership of the whole picture: we design it, build
+                  it, connect it, automate it, and keep improving it alongside
+                  you.
                 </p>
               </motion.div>
 
