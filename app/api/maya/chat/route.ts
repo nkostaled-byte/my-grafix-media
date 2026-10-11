@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { PROPOSED_SYSTEM_PROMPT } from "@/lib/maya-config";
 
 // CAUTION: static type-checking here needs a Node `globalThis` shim —
 // see AGENTS.md note in this same section. Do not "fix" in ways that ship
@@ -150,7 +151,7 @@ export async function POST(request: Request) {
       body: JSON.stringify({
         model: chatModel(),
         messages: [
-          { role: "system", content: SYSTEM_PROMPT },
+          { role: "system", content: PROPOSED_SYSTEM_PROMPT },
           ...historyOf(body).map((entry) => ({
             role: entry.role,
             content: entry.content,
