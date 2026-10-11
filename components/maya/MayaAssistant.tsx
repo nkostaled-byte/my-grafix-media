@@ -102,7 +102,7 @@ export function MayaAssistant() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           message,
-          history: nextMessages.slice(-12),
+          history: messages.slice(-12),
         }),
       });
       const payload = await response.json().catch(() => null);
