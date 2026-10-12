@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { PROPOSED_SYSTEM_PROMPT } from "@/lib/maya-config";
+import { sanitizeLead, shouldSubmitLead, submitMayaLead } from "@/lib/maya-lead";
 
 // CAUTION: static type-checking here needs a Node `globalThis` shim —
 // see AGENTS.md note in this same section. Do not "fix" in ways that ship
@@ -178,14 +179,33 @@ export async function POST(request: Request) {
 
     const raw = data.choices[0]?.message?.content ?? "";
     const parsed = parseReply(raw || "");
+    let reply = parsed.reply || "I’m here, try me again in a moment.";
+    let handoffInfo: any = undefined;
+
+    // Process Lead Handoff if details were provided
+    const lead = sanitizeLead(parsed.lead);
+    if (lead && shouldSubmitLead(lead, message, history)) {
+      const result = await submitMayaLead(lead, message, history);
+      if (result.success) {
+        handoffInfo = { status: "submitted", submissionId: result.submissionId };
+        if (!result.duplicate && result.submissionId) {
+          reply += `\n\nYour enquiry has been passed to our team (Reference: ${result.submissionId}).`;
+        }
+      } else {
+        handoffInfo = { status: "failed", error: result.error };
+        reply += `\n\nI was unable to submit your details directly to the team. Please reach out via https://mygrafixmedia.com/contact so we can assist you.`;
+        parsed.escalated = true;
+      }
+    }
 
     return NextResponse.json(
       {
         success: true,
         data: {
-          reply: parsed.reply || "I’m here, try me again in a moment.",
+          reply,
           ...(parsed.lead ? { lead: parsed.lead } : {}),
           escalated: parsed.escalated,
+          ...(handoffInfo ? { handoff: handoffInfo } : {}),
         },
       },
       { status: 200 }
